@@ -1,0 +1,48 @@
+# Config
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+config windowHintsSpread true
+config windowHintsWidth "75"
+config windowHintsHeight "75"
+config windowHintsRoundedCornerSize 10
+
+# Positions
+alias center move screenOriginX+screenSizeX/6;screenOriginY+screenSizeY/6 screenSizeX*2/3;screenSizeY*2/3
+alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
+alias lefthalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias righthalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+alias topleft corner top-left resize:screenSizeX/2;screenSizeY/2
+alias topright corner top-right resize:screenSizeX/2;screenSizeY/2
+alias bottomleft corner bottom-left resize:screenSizeX/2;screenSizeY/2
+alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
+
+# Hyper key (remap caps lock to f19, then f19 to command+option+control+shift)
+alias hyper cmd;alt;ctrl;shift
+
+# Standard bindings
+bind a:${hyper} hint ASDFGHJKLQWERTYUIOPCVBN
+bind z:${hyper} undo
+bind r:${hyper} relaunch
+bind g:${hyper} grid padding:5 0:8,6
+
+# Resize bindings
+bind right:alt       resize +10% +0
+bind left:alt        resize -10% +0
+bind up:alt          resize +0   -10%
+bind down:alt        resize +0   +10%
+
+# Focus bindings
+bind j:${hyper} focus behind
+bind k:${hyper} focus above
+
+# Standard positioning
+bind c:${hyper} ${center}
+bind left:${hyper} ${lefthalf}
+bind right:${hyper} ${righthalf}
+bind f:${hyper} ${full}
+bind -:${hyper} ${topleft}
+bind =:${hyper} ${topright}
+bind [:${hyper} ${bottomleft}
+bind ]:${hyper} ${bottomright}
