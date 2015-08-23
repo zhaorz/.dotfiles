@@ -1,6 +1,7 @@
 # .dotfiles
 
-A collection of standard configuration files. Easy to move around.
+A collection of standard configuration files. Easy to move around. No frills
+install script.
 
 ```bash
 $ cd ~
