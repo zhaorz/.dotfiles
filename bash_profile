@@ -34,9 +34,9 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
 
-alias work="cd ~/Documents/agile/cmu-112-plus-plus-m15-staff/"
-alias m15-master="sh ~/Documents/agile/cmu-112-plus-plus-m15-staff/scripts/git/m15-master.sh"
-alias m15-gh-pages="sh ~/Documents/agile/cmu-112-plus-plus-m15-staff/scripts/git/m15-gh-pages.sh"
+alias work="cd ~/Documents/cmu112++/cmu-112-plus-plus-m15-staff/"
+alias m15-master="sh ~/Documents/cmu112++/cmu-112-plus-plus-m15-staff/scripts/git/m15-master.sh"
+alias m15-gh-pages="sh ~/Documents/cmu112++/cmu-112-plus-plus-m15-staff/scripts/git/m15-gh-pages.sh"
 alias web="cd ~/Documents/web/zhaorz.github.io/"
 alias cpp="cd ~/Documents/c++/"
 
