@@ -6,7 +6,8 @@
 # oh-my-zsh installation
 export ZSH=/Users/Richard/.oh-my-zsh
 
-# custom theme in .oh-my-zsh/themes
+# custom theme in .oh-my-zsh-custom/themes
+ZSH_CUSTOM="$HOME/.oh-my-zsh-custom"
 ZSH_THEME="rz"
 
 plugins=(git)
