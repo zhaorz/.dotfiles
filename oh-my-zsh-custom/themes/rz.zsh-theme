@@ -46,7 +46,7 @@ PROMPT='${host_name} ${path_string} ${return_status} %{$reset_color%}'
 # Right Prompt
 #
 
-local time="%{$fg[magenta]%}(%*)%{$reset_color%}"
+local time="%{$fg[magenta]%}%*%{$reset_color%}"
 
 RPROMPT='$(git_custom_prompt) ${time}'
 
