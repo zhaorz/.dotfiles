@@ -12,7 +12,13 @@ BACKUP="$HOME/.dotfiles_backup"     # Backup of files that get replaced by symli
 
 
 # Space separated string of files/folders in SRC to symlink
-FILES="bash_profile editorconfig slate vimrc vim zshrc oh-my-zsh oh-my-zsh-custom"
+FILES="\
+  bash_profile \
+  editorconfig \
+  hushlogin \
+  slate \
+  vimrc vim \
+  zshrc oh-my-zsh oh-my-zsh-custom"
 
 # Create BACKUP directory
 echo "Creating backup directory at $BACKUP"
