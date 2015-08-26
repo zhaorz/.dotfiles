@@ -35,8 +35,13 @@ bind up:alt          resize +0   -10%
 bind down:alt        resize +0   +10%
 
 # Focus bindings
+bind h:${hyper} focus left
 bind j:${hyper} focus behind
 bind k:${hyper} focus above
+bind l:${hyper} focus right
+bind 1:${hyper} focus 'Google Chrome'
+bind 2:${hyper} focus 'Sublime Text'
+bind 3:${hyper} focus 'iTerm'
 
 # Standard positioning
 bind c:${hyper} ${center}
