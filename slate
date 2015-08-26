@@ -3,6 +3,7 @@ config defaultToCurrentScreen true
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
 
+config windowHintsIgnoreHiddenWindows false
 config windowHintsSpread true
 config windowHintsWidth "75"
 config windowHintsHeight "75"
