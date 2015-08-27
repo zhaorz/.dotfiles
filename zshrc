@@ -20,7 +20,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='sublime -w'
+  export EDITOR='vim'
 fi
 
 #
