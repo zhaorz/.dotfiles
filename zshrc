@@ -4,7 +4,7 @@
 #
 
 # oh-my-zsh installation
-export ZSH=/Users/Richard/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # custom theme in .oh-my-zsh-custom/themes
 ZSH_CUSTOM="$HOME/.oh-my-zsh-custom"
