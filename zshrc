@@ -33,3 +33,5 @@ alias work="cd ~/Documents/cmu112++/cmu-112-plus-plus-m15-staff/"
 alias web="cd ~/Documents/web/zhaorz.github.io/"
 alias cpp="cd ~/Documents/c++/"
 
+alias please="sudo"
+
