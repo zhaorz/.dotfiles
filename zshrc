@@ -12,7 +12,7 @@ ZSH_THEME="rz"
 
 plugins=(git)
 
-export PATH="/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Richard/bin/FDK/Tools/osx:/usr/local/cc0/bin:/Users/Richard/bin:/usr/local/mysql/bin"
+export PATH="/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Richard/bin/FDK/Tools/osx:/usr/local/cc0/bin:/Users/Richard/bin:/usr/local/mysql/bin:/usr/local/smlnj/bin:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -29,7 +29,11 @@ fi
 alias g="git"
 alias gac='git add -A && git commit '
 
+alias sml="rlwrap sml"
+alias ocaml="rlwrap ocaml"
+
 alias work="cd ~/Documents/cmu112++/cmu-112-plus-plus-m15-staff/"
+alias cmu="cd ~/Documents/academics"
 alias web="cd ~/Documents/web/zhaorz.github.io/"
 alias cpp="cd ~/Documents/c++/"
 
