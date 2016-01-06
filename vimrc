@@ -7,7 +7,7 @@ if !has('gui_running')
   " Make Solarized use 16 colors for Terminal support
   let g:solarized_termcolors=16
 endif
-set background=dark
+set background=light
 colorscheme solarized
 
 " NERDTree
