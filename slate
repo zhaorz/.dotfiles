@@ -22,9 +22,15 @@ alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
 alias leftcenter move screenOriginX;screenOriginY+screenSizeY/8 screenSizeX/2;screenSizeY*3/4
 alias rightcenter move screenOriginX+screenSizeX/2;screenOriginY+screenSizeY/8 screenSizeX/2;screenSizeY*3/4
 
+alias leftsixty move screenOriginX;screenOriginY screenSizeX*3/5;screenSizeY
+alias rightfortytop move screenOriginX+screenSizeX*3/5;screenOriginY screenSizeX*2/5;screenSizeY/2
+alias rightfortybottom move screenOriginX+screenSizeX*3/5;screenOriginY+screenSizeY/2 screenSizeX*2/5;screenSizeY/2
+
 # Layouts
 layout half-and-half 'iTerm' ${leftcenter}
 layout half-and-half 'Finder' ${rightcenter}
+
+layout sixty 'iTerm':MAIN_FIRST ${leftsixty} | ${rightfortytop} | ${rightfortybottom}
 
 # Hyper key (remap caps lock to f19, then f19 to command+option+control+shift)
 alias hyper cmd;alt;ctrl;shift
@@ -35,6 +41,7 @@ bind z:${hyper} undo
 bind r:${hyper} relaunch
 bind g:${hyper} grid padding:5 0:8,6
 bind 0:${hyper} layout half-and-half
+bind 9:${hyper} layout sixty
 
 # Resize bindings
 bind right:alt       resize +10% +0
@@ -44,12 +51,13 @@ bind down:alt        resize +0   +10%
 
 # Focus bindings
 bind h:${hyper} focus left
-bind j:${hyper} focus behind
-bind k:${hyper} focus above
+bind j:${hyper} focus down
+bind k:${hyper} focus up
 bind l:${hyper} focus right
 bind 1:${hyper} focus 'Google Chrome'
 bind 2:${hyper} focus 'Sublime Text'
 bind 3:${hyper} focus 'iTerm'
+bind 4:${hyper} focus 'Finder'
 
 # Standard positioning
 bind c:${hyper} ${center}
