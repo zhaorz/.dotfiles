@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# xscp <file> <destination>
+#
+# scp the file to user@host:directory
+# Directory is ~/ by default.
+
+
+USER="richardz"
+HOST="unix.andrew.cmu.edu"
+
+if [ $1 == "-r" ]
+then
+  FLAG="-r"
+  FILE=$2
+  DIR=$3
+else
+  FLAG=""
+  FILE=$1
+  DIR=$2
+fi
+
+if [ -z $DIR ]
+then
+  DIR="~/"
+fi
+
+scp $FLAG $FILE $USER@$HOST:$DIR
+

@@ -43,4 +43,6 @@ alias cpp="cd ~/Documents/c++/"
 # Git
 alias gitac='git add -A && git commit '
 
-export PATH=/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Richard/bin/FDK/Tools/osx:/usr/local/cc0/bin:/Users/Richard/bin:/usr/local/mysql/bin
+export PATH=$PATH:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Richard/bin/FDK/Tools/osx:/usr/local/cc0/bin:/Users/Richard/bin:/usr/local/mysql/bin
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
