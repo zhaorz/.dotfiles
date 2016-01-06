@@ -11,8 +11,6 @@ set background=light
 colorscheme solarized
 
 " NERDTree
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
 let g:NERDTreeWinSize = 22
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -66,6 +64,13 @@ set softtabstop=2
 map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 imap jk <Esc>
+nnoremap <C-_> :NERDTreeToggle<CR>
+
+" Easier split switching
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Highlights lines over 80 columns in red
 highlight ColorColumn ctermbg=red

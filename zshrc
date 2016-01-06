@@ -12,7 +12,7 @@ ZSH_THEME="rz"
 
 plugins=(git)
 
-export PATH="/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Richard/bin/FDK/Tools/osx:/usr/local/cc0/bin:/Users/Richard/bin:/usr/local/mysql/bin:/usr/local/smlnj/bin:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin"
+export PATH="$PATH:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Richard/bin/FDK/Tools/osx:/usr/local/cc0/bin:/Users/Richard/bin:/usr/local/mysql/bin:/usr/local/smlnj/bin:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -39,3 +39,5 @@ alias cpp="cd ~/Documents/c++/"
 
 alias please="sudo"
 
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
