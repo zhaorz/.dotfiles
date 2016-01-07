@@ -16,6 +16,7 @@ FILES="\
   editorconfig \
   hushlogin \
   slate \
+  tmux.conf \
   vimrc vim \
   zshrc oh-my-zsh oh-my-zsh-custom"
 

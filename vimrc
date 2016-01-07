@@ -65,6 +65,7 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 imap jk <Esc>
 nnoremap <C-_> :NERDTreeToggle<CR>
+nnoremap ; :
 
 " Easier split switching
 nnoremap <C-J> <C-W><C-J>
