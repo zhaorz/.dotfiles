@@ -12,7 +12,7 @@ BACKUP="$HOME/.dotfiles_backup"     # Backup of files that get replaced by symli
 
 # Space separated string of files/folders in SRC to symlink
 FILES="\
-  bash_profile \
+  bashrc bash_profile \
   editorconfig \
   hushlogin \
   slate \
