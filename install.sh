@@ -18,7 +18,6 @@ FILES="\
   slate \
   tmux.conf \
   vimrc vim \
-  zshrc oh-my-zsh oh-my-zsh-custom"
 
 # Create BACKUP directory
 echo "Creating backup directory at $BACKUP"
@@ -43,4 +42,3 @@ if [ -e "$HOME/bin" ]; then
 fi
 ln -s "$SRC/bin" "$HOME/bin"
 echo "Created symlink: bin/"
-

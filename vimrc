@@ -66,6 +66,7 @@ nnoremap <C-L> :nohl<CR><C-L>
 imap jk <Esc>
 nnoremap <C-_> :NERDTreeToggle<CR>
 nnoremap ; :
+nnoremap <F6> :CtrlPClearCache<CR>
 
 " Easier split switching
 nnoremap <C-J> <C-W><C-J>
