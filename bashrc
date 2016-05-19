@@ -1,5 +1,8 @@
 # .bashrc
 
+# Add user bin
+export PATH="$HOME/bin:$PATH"
+
 # Set prompt
 export PS1="$(tput setaf 6)\h $(tput setaf 3)\w $(tput setaf 4)\\$ $(tput sgr0)"
 
