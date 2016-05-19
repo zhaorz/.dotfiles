@@ -1,2 +1,12 @@
 *~
+.DS_Store
+
+# Emacs
+/auto-save-list
+/backups
 /elpa
+/eshell
+/games
+/places
+/recentf
+/tramp
