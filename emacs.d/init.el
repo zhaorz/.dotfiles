@@ -218,6 +218,10 @@
                                 (when powerline-display-mule-info
                                   (powerline-raw mode-line-mule-info nil 'l))
                                 (powerline-buffer-id nil 'l)
+                                (if (file-remote-p default-directory)  ; tramp
+                                    (powerline-raw " ♞" '(:foreground "#2aa198") 'l))
+                                (if buffer-read-only  ; read only
+                                    (powerline-raw " (ro)" '(:foreground "#6c71c4") 'l))
                                 (when (and (boundp 'which-func-mode) which-func-mode)
                                   (powerline-raw which-func-format nil 'l))
                                 (powerline-raw " ")
