@@ -17,7 +17,7 @@ FILES="\
   hushlogin \
   slate \
   tmux.conf \
-  vimrc vim \
+  vimrc vim"
 
 # Create BACKUP directory
 echo "Creating backup directory at $BACKUP"
