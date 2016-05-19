@@ -2,11 +2,11 @@
 .DS_Store
 
 # Emacs
-/auto-save-list
-/backups
-/elpa
-/eshell
-/games
-/places
-/recentf
-/tramp
+emacs.d/auto-save-list
+emacs.d/backups
+emacs.d/elpa
+emacs.d/eshell
+emacs.d/games
+emacs.d/places
+emacs.d/recentf
+emacs.d/tramp
