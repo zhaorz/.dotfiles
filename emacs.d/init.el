@@ -29,6 +29,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(linum ((t (:background "#eee8d5" :foreground "#93a1a1"))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#cb4b16" :height 1.3 :family "Source Code Pro"))))
+ '(org-level-2 ((t (:inherit variable-pitch :foreground "#859900" :height 1.2 :family "Source Code Pro"))))
+ '(org-level-3 ((t (:inherit variable-pitch :foreground "#268bd2" :height 1.15 :family "Source Code Pro"))))
+ '(org-level-4 ((t (:inherit variable-pitch :foreground "#b58900" :height 1.1 :family "Source Code Pro"))))
+ '(org-level-5 ((t (:inherit variable-pitch :foreground "#2aa198" :family "Source Code Pro"))))
+ '(org-level-6 ((t (:inherit variable-pitch :foreground "#859900" :family "Source Code Pro"))))
+ '(org-level-7 ((t (:inherit variable-pitch :foreground "#dc322f" :family "Source Code Pro"))))
+ '(org-level-8 ((t (:inherit variable-pitch :foreground "#268bd2" :family "Source Code Pro"))))
  '(sml/modified ((t (:foreground "#b58900" :weight bold)))))
 
 (require 'cl)
@@ -54,6 +62,8 @@
 (setq ring-bell-function 'ignore)
 (setq-default indent-tabs-mode nil) ; never use tabs
 (setq-default tab-width 4)
+(setq show-paren-delay 0)
+(show-paren-mode 1)
 
 ;; Shell
 (require 'multi-term)
@@ -87,6 +97,7 @@
 
 
 ;; Autocompletion
+(setq company-idle-delay 0.3)
 (add-hook 'after-init-hook 'global-company-mode)
 
 (require 'key-chord)
@@ -129,6 +140,10 @@
 
 (define-key evil-ex-map "e " 'helm-find-files)
 (define-key evil-ex-map "b " 'helm-buffers-list)
+
+;; Never override C-n/C-p
+(define-key evil-normal-state-map (kbd "C-n") 'next-line)
+(define-key evil-normal-state-map (kbd "C-p") 'previous-line)
 
 ;; Scroll with C-j/C-k
 (define-key evil-normal-state-map (kbd "C-k") (lambda ()
