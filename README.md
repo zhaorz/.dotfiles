@@ -12,8 +12,5 @@ $ chmod a+x install.sh
 $ ./install.sh
 ```
 
-To add more files and folders, put them into the `.dotfiles` directory, remove
-the leading dot (`.`), and add each name to the `FILES` list in `install.sh`.
-
-Upon running `install.sh`, if conflicting dotfiles are in the `$HOME` path, they
-will be moved to the `.dotfiles_backup` directory.
+All files and directories will be symlinked to your home directory unless
+included in `IGNORE` in `install.sh`.

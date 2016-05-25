@@ -1,6 +1,9 @@
 *~
 .DS_Store
 
+# Binaries
+bin/ngrok
+
 # Emacs
 emacs.d/auto-save-list
 emacs.d/backups
@@ -10,3 +13,5 @@ emacs.d/games
 emacs.d/places
 emacs.d/recentf
 emacs.d/tramp
+
+emacs.d/projectile*
