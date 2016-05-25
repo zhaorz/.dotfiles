@@ -36,19 +36,30 @@
   (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
   (define-key evil-normal-state-map (kbd ";") 'evil-ex))
 
+(use-package projectile
+  :config
+  (projectile-global-mode)
+  (setq projectile-completion-system 'helm
+        projectile-enable-caching t
+        projectile-mode-line '(:eval
+                               (if
+                                   (file-remote-p default-directory)
+                                   " Projectile"
+                                 (format " ρ[%s]"
+                                         (projectile-project-name))))
+       )
+  )
+
 (use-package helm
   :diminish helm-mode
   :init
   (progn
     (require 'helm-config)
-    ;; rebind tab to run persistent action
+    (helm-mode 1)
+
     (setq helm-split-window-in-side-p           t
           helm-move-to-line-cycle-in-source     t
-          helm-ff-search-library-in-sexp        t
-          helm-scroll-amount                    8
-          helm-ff-file-name-history-use-recentf t)
-
-    (helm-mode 1)
+          helm-scroll-amount                    8)
     )
   :bind (
          ("M-x" . helm-M-x)
@@ -59,6 +70,7 @@
          ("b" . helm-buffers-list)
          )
   )
+
 
 (use-package multi-term
   :bind (([f9] . multi-term))
@@ -93,7 +105,6 @@
 (load-theme 'solarized-light t)
 (add-to-list 'default-frame-alist
              '(font . "Source Code Pro 11"))
-(setq solarized-use-less-bold t)
 (setq ns-use-srgb-colorspace nil) ; fix weird colors in powerline
 
 (use-package whitespace
@@ -112,13 +123,41 @@
   (setq company-idle-delay 0.3)
   (global-company-mode))
 
-(add-hook 'prog-mode-hook 'turn-on-auto-fill)
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :config
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/yasnippet-snippets")
+  (yas-global-mode 1)
+  )
+
+(use-package flycheck
+  :diminish "ƒ✓"
+  :ensure t
+  :init (global-flycheck-mode)
+  :config (setq flycheck-display-errors-delay 0.1))
 
 (use-package key-chord
   :config
   (setq key-chord-two-keys-delay 0.2)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-mode 1)
+  )
+
+(use-package emmet-mode
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode)
+  (add-hook 'web-mode-hook  'emmet-mode)
+  )
+
+(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
   )
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -128,21 +167,40 @@
 (global-set-key (kbd "M-k") 'evil-window-up)
 (global-set-key (kbd "M-l") 'evil-window-right)
 
-
 ;; diminish
+(diminish 'auto-fill-function)
 (diminish 'undo-tree-mode)
+(diminish 'auto-revert-mode)
+
+(add-hook 'prog-mode-hook 'turn-on-auto-fill)
 
 (add-hook 'emacs-lisp-mode-hook
-  (lambda()
-    (setq mode-name "λ")))
+          (lambda()
+            (setq mode-name "λ")))
 
 (add-hook 'term-mode-hook
-  (lambda()
-    (setq mode-name "τ")))
+          (lambda()
+            (setq mode-name "τ")))
 
 (add-hook 'python-mode-hook
-  (lambda()
-    (setq mode-name "py")))
+          (lambda()
+            (setq mode-name "py")))
+
+(add-hook 'javascript-mode
+          (lambda()
+            (setq mode-name "js")))
+
+(add-hook 'ruby-mode
+          (lambda()
+            (setq mode-name "rb")))
+
+(add-hook 'org-mode-hook
+          (lambda()
+            setq mode-name "Ω"))
+
+(add-hook 'org-mode-hook
+          (lambda()
+            (auto-fill-mode t)))
 
 (set-face-attribute 'mode-line nil
                     :underline nil
