@@ -1,7 +1,10 @@
-# .bashrc
+#!/usr/bin/env bash
 
 # Add user bin
 export PATH="$HOME/bin:$PATH"
+
+# rvm
+source "$HOME/.rvm/scripts/rvm"
 
 # Set prompt
 export PS1="$(tput setaf 6)\h $(tput setaf 3)\w $(tput setaf 4)\\$ $(tput sgr0)"
