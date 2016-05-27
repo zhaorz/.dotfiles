@@ -3,6 +3,7 @@
 ;;; Richard Zhao
 ;;;
 
+
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -21,7 +22,6 @@
   :init
   (setq evil-want-C-i-jump nil)
   :config
-  (evil-mode t)
   (evil-set-initial-state 'term-mode 'emacs)
 
   (define-key evil-normal-state-map (kbd "C-k") (lambda ()
@@ -34,7 +34,21 @@
                                                   ))
   (define-key evil-normal-state-map (kbd "C-n") 'next-line)
   (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
-  (define-key evil-normal-state-map (kbd ";") 'evil-ex))
+  (define-key evil-normal-state-map (kbd ";") 'evil-ex)
+
+
+  (use-package evil-leader
+    :config
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      "gs" 'magit-status
+      "pf" 'projectile-find-file
+      "pp" 'projectile-switch-project)
+    (global-evil-leader-mode)
+    )
+
+  (evil-mode t)
+  )
 
 (use-package projectile
   :config
@@ -47,7 +61,7 @@
                                    " Projectile"
                                  (format " ρ[%s]"
                                          (projectile-project-name))))
-       )
+        )
   )
 
 (use-package helm
@@ -97,6 +111,11 @@
 (setq-default tab-width 4)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
+(fset 'yes-or-no-p 'y-or-n-p)
+(setq help-window-select t)
+
+(setq backup-directory-alist `((".*" . "~/.emacs.d/tmp"))
+      auto-save-file-name-transforms `((".*" , "~/.emacs.d/tmp" t)))
 
 (setq explicit-shell-file-name "/bin/bash")
 (setq shell-file-name "bash")
@@ -144,6 +163,7 @@
   )
 
 (use-package emmet-mode
+  :diminish (emmet-mode . " Σ")
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode)
@@ -153,12 +173,23 @@
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
+
+  (use-package company-web
+    :config
+    (use-package company-web-html)
+    (add-hook 'web-mode-hook
+              (lambda ()
+                (set (make-local-variable 'company-backends) '(company-web-html))
+                (company-mode t))))
   )
+
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -170,7 +201,8 @@
 ;; diminish
 (diminish 'auto-fill-function)
 (diminish 'undo-tree-mode)
-(diminish 'auto-revert-mode)
+(eval-after-load 'auto-revert-mode
+  '(diminish 'auto-revert-mode))
 
 (add-hook 'prog-mode-hook 'turn-on-auto-fill)
 

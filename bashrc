@@ -2,6 +2,7 @@
 
 # Add user bin
 export PATH="$HOME/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 
 # rvm
 source "$HOME/.rvm/scripts/rvm"
