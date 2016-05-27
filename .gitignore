@@ -13,5 +13,6 @@ emacs.d/games
 emacs.d/places
 emacs.d/recentf
 emacs.d/tramp
+emacs.d/tmp
 
 emacs.d/projectile*
