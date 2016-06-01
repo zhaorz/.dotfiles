@@ -18,92 +18,6 @@
   (require 'use-package))
 (require 'diminish)
 
-(use-package evil
-  :init
-  (setq evil-want-C-i-jump nil)
-  :config
-  (evil-set-initial-state 'term-mode 'emacs)
-
-  (define-key evil-normal-state-map (kbd "C-k") (lambda ()
-                                                  (interactive)
-                                                  (evil-scroll-up 15)
-                                                  ))
-  (define-key evil-normal-state-map (kbd "C-j") (lambda ()
-                                                  (interactive)
-                                                  (evil-scroll-down 15)
-                                                  ))
-  (define-key evil-normal-state-map (kbd "C-n") 'next-line)
-  (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
-  (define-key evil-normal-state-map (kbd ";") 'evil-ex)
-
-
-  (use-package evil-leader
-    :config
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key
-      "gs" 'magit-status
-      "pf" 'projectile-find-file
-      "pp" 'projectile-switch-project)
-    (global-evil-leader-mode)
-    )
-
-  (evil-mode t)
-  )
-
-(use-package projectile
-  :config
-  (projectile-global-mode)
-  (setq projectile-completion-system 'helm
-        projectile-enable-caching t
-        projectile-mode-line '(:eval
-                               (if
-                                   (file-remote-p default-directory)
-                                   " Projectile"
-                                 (format " ρ[%s]"
-                                         (projectile-project-name))))
-        )
-  )
-
-(use-package helm
-  :diminish helm-mode
-  :init
-  (progn
-    (require 'helm-config)
-    (helm-mode 1)
-
-    (setq helm-split-window-in-side-p           t
-          helm-move-to-line-cycle-in-source     t
-          helm-scroll-amount                    8)
-    )
-  :bind (
-         ("M-x" . helm-M-x)
-         ("C-x C-f" . helm-find-files)
-         ("C-x b" . helm-mini)
-         :map evil-ex-map
-         ("e" . helm-find-files)
-         ("b" . helm-buffers-list)
-         )
-  )
-
-
-(use-package multi-term
-  :bind (([f9] . multi-term))
-  :config
-  (setq multi-term-program "/bin/bash")
-  (add-hook 'term-mode-hook
-            (lambda ()
-              (setq term-buffer-maximum-size 4096)))
-  (add-hook 'term-mode-hook
-            (lambda ()
-              (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
-              (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))))
-  )
-
-(use-package tramp
-  :defer t
-  :config
-  (setq tramp-default-method "ssh"))
-
 ;; Globals
 (setq inhibit-startup-message t)
 (setq ring-bell-function 'ignore)
@@ -126,13 +40,97 @@
              '(font . "Source Code Pro 11"))
 (setq ns-use-srgb-colorspace nil) ; fix weird colors in powerline
 
+
+(use-package evil
+  :init
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-set-initial-state 'term-mode 'emacs)
+
+  (define-key evil-normal-state-map (kbd "C-k") (lambda ()
+                                                  (interactive)
+                                                  (evil-scroll-up 15)
+                                                  ))
+  (define-key evil-normal-state-map (kbd "C-j") (lambda ()
+                                                  (interactive)
+                                                  (evil-scroll-down 15)
+                                                  ))
+  (define-key evil-normal-state-map (kbd "C-n") 'next-line)
+  (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
+  (define-key evil-normal-state-map (kbd ";") 'evil-ex)
+
+  (global-set-key (kbd "M-h") 'evil-window-left)
+  (global-set-key (kbd "M-j") 'evil-window-down)
+  (global-set-key (kbd "M-k") 'evil-window-up)
+  (global-set-key (kbd "M-l") 'evil-window-right)
+
+  (use-package evil-leader
+    :config
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      "gs" 'magit-status
+      "pf" 'projectile-find-file
+      "pp" 'projectile-switch-project)
+    (global-evil-leader-mode)
+    )
+
+  (evil-mode t))
+
+
+(use-package projectile
+  :config
+  (projectile-global-mode)
+  (setq projectile-completion-system 'helm
+        projectile-enable-caching t
+        projectile-mode-line '(:eval
+                               (if
+                                   (file-remote-p default-directory)
+                                   " Projectile"
+                                 (format " ρ[%s]"
+                                         (projectile-project-name))))))
+
+(use-package helm
+  :diminish helm-mode
+  :init
+  (progn
+    (require 'helm-config)
+    (helm-mode 1)
+
+    (setq helm-split-window-in-side-p           t
+          helm-move-to-line-cycle-in-source     t
+          helm-scroll-amount                    8)
+    )
+  :bind (
+         ("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x b" . helm-mini)
+         :map evil-ex-map
+         ("e" . helm-find-files)
+         ("b" . helm-buffers-list)))
+
+(use-package multi-term
+  :bind (([f9] . multi-term))
+  :config
+  (setq multi-term-program "/bin/bash")
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (setq term-buffer-maximum-size 4096)))
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
+              (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next)))))
+
+(use-package tramp
+  :defer t
+  :config
+  (setq tramp-default-method "ssh"))
+
 (use-package whitespace
   :diminish whitespace-mode
   :config
   (setq whitespace-line-column 80) ; limit line length
   (setq whitespace-style '(face lines-tail))
-  (add-hook 'prog-mode-hook 'whitespace-mode)
-  )
+  (add-hook 'prog-mode-hook 'whitespace-mode))
 
 (use-package company
   :diminish company-mode
@@ -146,8 +144,7 @@
   :diminish yas-minor-mode
   :config
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/yasnippet-snippets")
-  (yas-global-mode 1)
-  )
+  (yas-global-mode 1))
 
 (use-package flycheck
   :diminish "ƒ✓"
@@ -159,16 +156,14 @@
   :config
   (setq key-chord-two-keys-delay 0.2)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-  (key-chord-mode 1)
-  )
+  (key-chord-mode 1))
 
 (use-package emmet-mode
   :diminish (emmet-mode . " Σ")
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode)
-  (add-hook 'web-mode-hook  'emmet-mode)
-  )
+  (add-hook 'web-mode-hook  'emmet-mode))
 
 (use-package web-mode
   :config
@@ -187,16 +182,14 @@
     (add-hook 'web-mode-hook
               (lambda ()
                 (set (make-local-variable 'company-backends) '(company-web-html))
-                (company-mode t))))
-  )
+                (company-mode t)))))
 
+(use-package org-bullets-mode
+  :diminish
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(global-set-key (kbd "M-h") 'evil-window-left)
-(global-set-key (kbd "M-j") 'evil-window-down)
-(global-set-key (kbd "M-k") 'evil-window-up)
-(global-set-key (kbd "M-l") 'evil-window-right)
 
 ;; diminish
 (diminish 'auto-fill-function)
@@ -218,17 +211,20 @@
           (lambda()
             (setq mode-name "py")))
 
-(add-hook 'javascript-mode
-          (lambda()
-            (setq mode-name "js")))
+(eval-after-load 'javascript-mode
+  (add-hook 'javascript-mode
+            (lambda()
+              (setq mode-name "js"))))
 
-(add-hook 'ruby-mode
-          (lambda()
-            (setq mode-name "rb")))
+(eval-after-load 'ruby-mode
+  (add-hook 'ruby-mode
+            (lambda()
+              (setq mode-name "rb"))))
 
-(add-hook 'org-mode-hook
-          (lambda()
-            setq mode-name "Ω"))
+(eval-after-load 'org-mode
+  (add-hook 'org-mode-hook
+            (lambda()
+              (setq mode-name "Ω"))))
 
 (add-hook 'org-mode-hook
           (lambda()
@@ -253,8 +249,7 @@
 
 ;; magit
 (use-package magit
-  :bind (("C-x g" . magit-status))
-  )
+  :bind (("C-x g" . magit-status)))
 
 (defun powerline-custom-theme ()
   "Setup the default mode-line."
