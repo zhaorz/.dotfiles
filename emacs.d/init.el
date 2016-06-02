@@ -34,6 +34,23 @@
 (setq explicit-shell-file-name "/bin/bash")
 (setq shell-file-name "bash")
 
+(define-key global-map (kbd "C-c c") 'org-capture)
+(setq org-export-coding-system 'utf-8)
+(setq org-todo-keywords
+      '((sequence "TODO" "WAITING" "DONE")))
+
+(setq org-capture-templates
+      '(("t" "Todo" entry
+         (file+headline "~/Org/todo.org" "Assigned")
+         "* TODO %? %U\n  %i\n  %a\n")
+        ("j" "Journal" entry
+         (file+datetree "~/org/journal.org")
+         "* %U %^{Title}\n     %?\n")
+        ))
+
+(define-key global-map (kbd "s-{") 'previous-buffer)
+(define-key global-map (kbd "s-}") 'next-buffer)
+
 ;; Visual
 (load-theme 'solarized-light t)
 (add-to-list 'default-frame-alist
@@ -188,6 +205,14 @@
   :diminish
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 

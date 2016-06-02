@@ -25,10 +25,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(linum ((t (:background "#eee8d5" :foreground "#93a1a1"))))
- '(org-level-1 ((t (:inherit variable-pitch :foreground "#cb4b16" :height 1.3 :family "Source Code Pro"))))
- '(org-level-2 ((t (:inherit variable-pitch :foreground "#859900" :height 1.2 :family "Source Code Pro"))))
- '(org-level-3 ((t (:inherit variable-pitch :foreground "#268bd2" :height 1.15 :family "Source Code Pro"))))
- '(org-level-4 ((t (:inherit variable-pitch :foreground "#b58900" :height 1.1 :family "Source Code Pro"))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#cb4b16" :height 1.0 :family "Source Code Pro"))))
+ '(org-level-2 ((t (:inherit variable-pitch :foreground "#859900" :height 1.0 :family "Source Code Pro"))))
+ '(org-level-3 ((t (:inherit variable-pitch :foreground "#268bd2" :height 1.0 :family "Source Code Pro"))))
+ '(org-level-4 ((t (:inherit variable-pitch :foreground "#b58900" :height 1.0 :family "Source Code Pro"))))
  '(org-level-5 ((t (:inherit variable-pitch :foreground "#2aa198" :family "Source Code Pro"))))
  '(org-level-6 ((t (:inherit variable-pitch :foreground "#859900" :family "Source Code Pro"))))
  '(org-level-7 ((t (:inherit variable-pitch :foreground "#dc322f" :family "Source Code Pro"))))
