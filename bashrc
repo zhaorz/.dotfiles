@@ -4,6 +4,9 @@
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
+# LaTeX bin
+export PATH="$PATH:/usr/local/texlive/2014/bin/x86_64-darwin"
+
 # rvm
 source "$HOME/.rvm/scripts/rvm"
 
