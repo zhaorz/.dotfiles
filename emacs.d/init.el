@@ -18,11 +18,11 @@
   (require 'use-package))
 (require 'diminish)
 
-(load-file "~/.emacs.d/elisp/globals.el")
-(load-file "~/.emacs.d/elisp/org.el")
-(load-file "~/.emacs.d/elisp/visual.el")
-(load-file "~/.emacs.d/elisp/custom-diminish.el")
-(load-file "~/.emacs.d/elisp/mode-line.el")
+(load-file "~/.emacs.d/elisp/init-globals.el")
+(load-file "~/.emacs.d/elisp/init-org.el")
+(load-file "~/.emacs.d/elisp/init-visual.el")
+(load-file "~/.emacs.d/elisp/init-diminish.el")
+(load-file "~/.emacs.d/elisp/init-modeline.el")
 (load-file "~/.emacs.d/elisp/init-hydra.el")
 
 (use-package evil
