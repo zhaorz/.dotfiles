@@ -23,6 +23,7 @@
 (load-file "~/.emacs.d/elisp/visual.el")
 (load-file "~/.emacs.d/elisp/custom-diminish.el")
 (load-file "~/.emacs.d/elisp/mode-line.el")
+(load-file "~/.emacs.d/elisp/init-hydra.el")
 
 (use-package evil
   :init
@@ -47,15 +48,15 @@
   (global-set-key (kbd "M-k") 'evil-window-up)
   (global-set-key (kbd "M-l") 'evil-window-right)
 
-  (use-package evil-leader
-    :config
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key
-      "gs" 'magit-status
-      "pf" 'projectile-find-file
-      "pp" 'projectile-switch-project)
-    (global-evil-leader-mode)
-    )
+  ;; (use-package evil-leader
+  ;;   :config
+  ;;   (evil-leader/set-leader "<SPC>")
+  ;;   (evil-leader/set-key
+  ;;     "gs" 'magit-status
+  ;;     "pf" 'projectile-find-file
+  ;;     "pp" 'projectile-switch-project)
+  ;;   (global-evil-leader-mode)
+  ;;   )
 
   (evil-mode t))
 
