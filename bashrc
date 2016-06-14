@@ -3,15 +3,18 @@
 # Add user bin
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/opt/ruby/bin:$PATH"
+
+eval "$(rbenv init -)"
 
 # LaTeX bin
 export PATH="$PATH:/usr/local/texlive/2014/bin/x86_64-darwin"
 
 # rvm
-source "$HOME/.rvm/scripts/rvm"
+# source "$HOME/.rvm/scripts/rvm"
 
 # Set prompt
-export PS1="$(tput setaf 6)\h $(tput setaf 3)\w $(tput setaf 4)\\$ $(tput sgr0)"
+export PS1="\[$(tput setaf 6)\]\h \[$(tput setaf 3)\]\w \[$(tput setaf 4)\]\\$ \[$(tput sgr0)\]"
 
 #
 # Alias
@@ -36,3 +39,6 @@ alias web="cd ~/Documents/web/zhaorz.github.io/"
 alias cpp="cd ~/Documents/c++/"
 
 alias please="sudo"
+
+export NVM_DIR="/Users/rzhao/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
