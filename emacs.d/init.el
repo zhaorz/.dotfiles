@@ -18,12 +18,14 @@
   (require 'use-package))
 (require 'diminish)
 
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 (load-file "~/.emacs.d/elisp/init-globals.el")
 (load-file "~/.emacs.d/elisp/init-org.el")
 (load-file "~/.emacs.d/elisp/init-visual.el")
 (load-file "~/.emacs.d/elisp/init-diminish.el")
 (load-file "~/.emacs.d/elisp/init-modeline.el")
-(load-file "~/.emacs.d/elisp/init-hydra.el")
 
 (use-package evil
   :init
@@ -48,18 +50,7 @@
   (global-set-key (kbd "M-k") 'evil-window-up)
   (global-set-key (kbd "M-l") 'evil-window-right)
 
-  ;; (use-package evil-leader
-  ;;   :config
-  ;;   (evil-leader/set-leader "<SPC>")
-  ;;   (evil-leader/set-key
-  ;;     "gs" 'magit-status
-  ;;     "pf" 'projectile-find-file
-  ;;     "pp" 'projectile-switch-project)
-  ;;   (global-evil-leader-mode)
-  ;;   )
-
   (evil-mode t))
-
 
 (use-package projectile
   :config
@@ -134,7 +125,12 @@
   :diminish "ƒ✓"
   :ensure t
   :init (global-flycheck-mode)
-  :config (setq flycheck-display-errors-delay 0.1))
+  :config
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint)))
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (setq flycheck-display-errors-delay 0.1))
 
 (use-package key-chord
   :config
@@ -152,6 +148,7 @@
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -183,6 +180,8 @@
 
 (use-package magit
   :bind (("C-x g" . magit-status)))
+
+(load-file "~/.emacs.d/elisp/init-hydra.el")
 
 (provide 'init)
 ;;; init.el ends here
