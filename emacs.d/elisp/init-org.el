@@ -17,6 +17,9 @@
         ("j" "Journal" entry
          (file+datetree "~/org/journal.org")
          "* %U %^{Title}\n     %?\n")
+        ("n" "Note" entry
+         (file+datetree "~/org/notes.org")
+         "* %U %^{Title}\n     %?\n")
         ))
 
 

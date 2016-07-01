@@ -23,7 +23,9 @@
 (load-file "~/.emacs.d/elisp/init-visual.el")
 (load-file "~/.emacs.d/elisp/init-diminish.el")
 (load-file "~/.emacs.d/elisp/init-modeline.el")
-(load-file "~/.emacs.d/elisp/init-hydra.el")
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 (use-package evil
   :init
@@ -113,7 +115,8 @@
   :diminish whitespace-mode
   :config
   (setq whitespace-line-column 80) ; limit line length
-  (setq whitespace-style '(face lines-tail))
+  ;; (setq whitespace-style '(face lines-tail))
+  (setq whitespace-style 'nil)
   (add-hook 'prog-mode-hook 'whitespace-mode))
 
 (use-package company
@@ -134,7 +137,12 @@
   :diminish "ƒ✓"
   :ensure t
   :init (global-flycheck-mode)
-  :config (setq flycheck-display-errors-delay 0.1))
+  :config
+  (setq flycheck-display-errors-delay 0.1)
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint)))
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
 
 (use-package key-chord
   :config
@@ -152,6 +160,8 @@
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -159,7 +169,9 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
-
+  (setq-default js-indent-level 2)
+  (setq web-mode-content-types-alist
+        '(("jsx" . "\\.js[x]?\\'")))
   (use-package company-web
     :config
     (use-package company-web-html)
@@ -183,6 +195,13 @@
 
 (use-package magit
   :bind (("C-x g" . magit-status)))
+
+(use-package slim-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode))
+  )
+
+(load-file "~/.emacs.d/elisp/init-hydra.el")
 
 (provide 'init)
 ;;; init.el ends here
