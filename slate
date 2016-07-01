@@ -33,7 +33,7 @@ layout half-and-half 'Finder' ${rightcenter}
 layout sixty 'iTerm':MAIN_FIRST ${leftsixty} | ${rightfortytop} | ${rightfortybottom}
 
 # Hyper key (remap caps lock to f19, then f19 to command+option+control+shift)
-alias hyper cmd;alt;ctrl;shift
+alias hyper ctrl;shift
 
 # Standard bindings
 bind a:${hyper} hint ASDFGHJKLQWERTYUIOPCVBN

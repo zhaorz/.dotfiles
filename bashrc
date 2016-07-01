@@ -33,7 +33,7 @@ alias xkinit="kinit richardz@ANDREW.CMU.EDU"
 alias sml="rlwrap sml"
 alias ocaml="rlwrap ocaml"
 
-alias work="cd ~/Documents/cmu112++/cmu-112-plus-plus-m15-staff/"
+alias work="cd ~/Documents/workspace/"
 alias cmu="cd ~/Documents/academics"
 alias web="cd ~/Documents/web/zhaorz.github.io/"
 alias cpp="cd ~/Documents/c++/"
