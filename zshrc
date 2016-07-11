@@ -11,6 +11,8 @@ ZSH_CUSTOM="$HOME/.oh-my-zsh-custom"
 ZSH_THEME="rz"
 
 plugins=(git)
+fpath=(~/.oh-my-zsh-custom/completions $fpath)
+autoload -Uz compinit && compinit -i
 
 # Add user bin
 export PATH="$HOME/bin:$PATH"
