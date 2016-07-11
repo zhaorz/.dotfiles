@@ -3,6 +3,17 @@
 ;;; Richard Zhao
 ;;;
 
+; list the packages you want
+(setq package-list 
+      '(use-package diminish exec-path-from-shell evil
+                    projectile helm multi-term tramp
+                    whitespace company yasnippet flycheck
+                    key-chord emmet-mode web-mode
+                    company-web solarized-theme
+                    org-bullets markdown-mode
+                    hydra powerline
+                    magit slim-mode
+        ))
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
@@ -10,6 +21,15 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (setq package-enable-at-startup nil)
 (package-initialize)
+
+; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)

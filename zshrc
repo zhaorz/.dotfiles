@@ -12,7 +12,15 @@ ZSH_THEME="rz"
 
 plugins=(git)
 
-export PATH="$PATH:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Users/Richard/bin/FDK/Tools/osx:/usr/local/cc0/bin:/Users/Richard/bin:/usr/local/mysql/bin:/usr/local/smlnj/bin:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin"
+# Add user bin
+export PATH="$HOME/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/opt/ruby/bin:$PATH"
+
+eval "$(rbenv init -)"
+
+# LaTeX bin
+export PATH="$PATH:/usr/local/texlive/2014/bin/x86_64-darwin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -26,13 +34,19 @@ fi
 #
 # Alias
 #
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
 alias g="git"
+alias gs="git status"
 alias gac='git add -A && git commit '
 
 alias sml="rlwrap sml"
 alias ocaml="rlwrap ocaml"
 
-alias work="cd ~/Documents/cmu112++/cmu-112-plus-plus-m15-staff/"
+alias work="cd ~/Documents/workspace"
 alias cmu="cd ~/Documents/academics"
 alias web="cd ~/Documents/web/zhaorz.github.io/"
 alias cpp="cd ~/Documents/c++/"
@@ -41,3 +55,6 @@ alias please="sudo"
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export NVM_DIR="/Users/rzhao/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
