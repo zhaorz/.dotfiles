@@ -4,7 +4,7 @@
 ;;;
 
 ; list the packages you want
-(setq package-list 
+(setq package-list
       '(use-package diminish exec-path-from-shell evil
                     projectile helm multi-term tramp
                     whitespace company yasnippet flycheck
@@ -22,7 +22,7 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-; fetch the list of packages available 
+; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -137,6 +137,7 @@
   :defer 2
   :config
   (setq company-idle-delay 0.3)
+  (add-to-list 'company-backends 'company-tern)
   (global-company-mode))
 
 (use-package yasnippet
@@ -173,7 +174,7 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -182,8 +183,6 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq-default js-indent-level 2)
-  (setq web-mode-content-types-alist
-        '(("jsx" . "\\.js[x]?\\'")))
   (use-package company-web
     :config
     (use-package company-web-html)
