@@ -10,19 +10,25 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM="$HOME/.oh-my-zsh-custom"
 ZSH_THEME="rz"
 
-plugins=(git)
+plugins=(git rake-fast)
 fpath=(~/.oh-my-zsh-custom/completions $fpath)
 autoload -Uz compinit && compinit -i
 
-# Add user bin
+# Paths
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:/usr/local/opt/ruby/bin:$PATH"
+export PATH="$PATH:/usr/local/texlive/2014/bin/x86_64-darwin"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:/usr/local/go/bin"
+
+export GOPATH="$HOME/workspace/go"
+
+export NVM_DIR="/Users/rzhao/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 eval "$(rbenv init -)"
 
-# LaTeX bin
-export PATH="$PATH:/usr/local/texlive/2014/bin/x86_64-darwin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -56,7 +62,4 @@ alias cpp="cd ~/Documents/c++/"
 alias please="sudo"
 
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-export NVM_DIR="/Users/rzhao/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
