@@ -23,6 +23,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:/usr/local/go/bin"
 
 export GOPATH="$HOME/workspace/go"
+export PATH="$PATH:$GOPATH/bin"
 
 export NVM_DIR="/Users/rzhao/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
