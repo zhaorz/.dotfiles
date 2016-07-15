@@ -38,16 +38,17 @@
   (require 'use-package))
 (require 'diminish)
 
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
-
 (load-file "~/.emacs.d/elisp/init-globals.el")
 (load-file "~/.emacs.d/elisp/init-org.el")
 (load-file "~/.emacs.d/elisp/init-visual.el")
 (load-file "~/.emacs.d/elisp/init-diminish.el")
 (load-file "~/.emacs.d/elisp/init-modeline.el")
 
-(when (memq window-system '(mac ns))
+(setenv "ESHELL" (expand-file-name "~/bin/eshell"))
+
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-copy-env "GOPATH")
   (exec-path-from-shell-initialize))
 
 (use-package evil
@@ -210,6 +211,11 @@
 (use-package slim-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode))
+  )
+
+(use-package go-mode
+  :config
+  (setenv "GOPATH" "/Users/rzhao/workspace/go")
   )
 
 (load-file "~/.emacs.d/elisp/init-hydra.el")
