@@ -28,7 +28,7 @@ export PATH="$PATH:$GOPATH/bin"
 export NVM_DIR="/Users/rzhao/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 
 source $ZSH/oh-my-zsh.sh

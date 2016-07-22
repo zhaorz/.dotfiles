@@ -84,7 +84,8 @@
 (use-package powerline
   :config
   (powerline-custom-theme)
-  (setq powerline-default-separator 'slant))
+  (setq powerline-default-separator 'nil)
+  )
 
 (provide 'mode-line)
 ;;; mode-line.el ends here

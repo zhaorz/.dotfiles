@@ -32,7 +32,7 @@ git_custom_prompt() {
 # Main prompt
 #
 
-local host_name="%{$fg[cyan]%}赵"
+local host_name="%{$fg[cyan]%}%n@%m"
 local path_string="%{$fg[yellow]%}%~"
 local prompt_string="»"
 
@@ -49,4 +49,3 @@ PROMPT='${host_name} ${path_string} ${return_status} %{$reset_color%}'
 local time="%{$fg[magenta]%}%*%{$reset_color%}"
 
 RPROMPT='$(git_custom_prompt) ${time}'
-
