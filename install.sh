@@ -140,11 +140,24 @@ install_bin () {
     link_file "$src" "$dst"
 }
 
+install_zsh () {
+    info 'installing zsh'
+    local overwrite_all=false backup_all=false skip_all=false
+
+    src="$DOTFILES_ROOT/oh-my-zsh"
+    dst="$HOME/$(basename "$src")"
+    link_file "$src" "$dst"
+
+    src="$DOTFILES_ROOT/oh-my-zsh-custom"
+    dst="$HOME/$(basename "$src")"
+    link_file "$src" "$dst"
+}
+
 install_dotfiles
-
 echo ''
-
 install_bin
+echo ''
+install_zsh
 
 echo ''
 echo '  All installed!'
