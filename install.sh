@@ -6,10 +6,13 @@
 IGNORE=(
     ".git"
     ".gitignore"
+    ".gitmodules"
     "README.md"
     ".DS_Store"
     "install.sh"
     "bin"
+    "oh-my-zsh"
+    "oh-my-zsh-custom"
 )
 
 DOTFILES_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
