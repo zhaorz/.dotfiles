@@ -5,7 +5,7 @@
 define hyper cmd+ctrl+alt+shift
 
 // Set default values for screen padding
-kwmc config padding 20 20 20 20
+kwmc config padding 30 20 20 20
 
 // Set default values for container gaps
 kwmc config gap 15 15
@@ -23,7 +23,7 @@ kwmc config float-non-resizable on
 kwmc config lock-to-container on
 
 // Set focus-follows-mouse-mode to autoraise
-kwmc config focus-follows-mouse on
+kwmc config focus-follows-mouse off
 
 /* Focus-follows-mouse is temporarily disabled when
    a floating window has focus */
@@ -57,6 +57,7 @@ kwmc config spawn left
    This is because some applications do not have the
    AXWindowRole and AXStandardWindowSubRole */
 kwmc rule owner="iTerm2" properties={role="AXDialog"}
+kwmc rule owner="Emacs"  properties={role="AXStandardWindow"}
 
 /* The following commands create rules that
    blacklists an application from Kwms tiling
@@ -125,15 +126,15 @@ kwmc bindsym cmd+alt-2 display -f 1
 kwmc bindsym cmd+alt-3 display -f 2
 
 // Give Focus To Space
-kwmc bindsym hyper-1 space -fExperimental 1
-kwmc bindsym hyper-2 space -fExperimental 2
-kwmc bindsym hyper-3 space -fExperimental 3
-kwmc bindsym hyper-4 space -fExperimental 4
-kwmc bindsym hyper-5 space -fExperimental 5
-kwmc bindsym hyper-6 space -fExperimental 6
-kwmc bindsym hyper-7 space -fExperimental 7
-kwmc bindsym hyper-8 space -fExperimental 8
-kwmc bindsym hyper-9 space -fExperimental 9
+// kwmc bindsym hyper-1 space -fExperimental 1
+// kwmc bindsym hyper-2 space -fExperimental 2
+// kwmc bindsym hyper-3 space -fExperimental 3
+// kwmc bindsym hyper-4 space -fExperimental 4
+// kwmc bindsym hyper-5 space -fExperimental 5
+// kwmc bindsym hyper-6 space -fExperimental 6
+// kwmc bindsym hyper-7 space -fExperimental 7
+// kwmc bindsym hyper-8 space -fExperimental 8
+// kwmc bindsym hyper-9 space -fExperimental 9
 
 // Move Focused Window To Space
 kwmc bindsym ctrl+alt-left window -m space left

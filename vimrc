@@ -8,7 +8,7 @@ if !has('gui_running')
   let g:solarized_termcolors=16
 endif
 set background=light
-colorscheme solarized
+colorscheme zenburn
 
 " NERDTree
 let g:NERDTreeWinSize = 22

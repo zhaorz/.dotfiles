@@ -12,8 +12,8 @@
 # Git setup
 #
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%} %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[green]%} %{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}* %{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
@@ -32,12 +32,12 @@ git_custom_prompt() {
 # Main prompt
 #
 
-local host_name="%{$fg[cyan]%}赵"
+local host_name="%{$fg[magenta]%}赵"
 local path_string="%{$fg[yellow]%}%~"
 local prompt_string="»"
 
 # Make prompt_string red if the previous command failed.
-local return_status="%(?:%{$fg[blue]%}$prompt_string:%{$fg[red]%}$prompt_string)"
+local return_status="%(?:%{$fg[green]%}$prompt_string:%{$fg[red]%}$prompt_string)"
 
 PROMPT='${host_name} ${path_string} ${return_status} %{$reset_color%}'
 
