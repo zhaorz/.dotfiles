@@ -9,7 +9,7 @@
                     projectile helm multi-term tramp
                     whitespace company yasnippet flycheck
                     key-chord emmet-mode web-mode
-                    company-web solarized-theme
+                    company-web solarized-theme zenburn-theme
                     org-bullets markdown-mode
                     hydra powerline
                     magit slim-mode

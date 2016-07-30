@@ -155,6 +155,9 @@ var relaunch = slate.operation('relaunch');
 // General
 slate.bind(`a:${hyper}`, hint);
 slate.bind(`r:${hyper}`, relaunch);
+slate.bind(`t:${hyper}`, function(win) {
+  slate.shell('/usr/bin/osascript /Users/Richard/bin/iterm.scpt' , true);
+});
 
 // Layouts
 slate.bind(`f:${hyper}`, full);
