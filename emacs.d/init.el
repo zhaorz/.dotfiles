@@ -13,6 +13,7 @@
                     org-bullets markdown-mode
                     hydra powerline
                     magit slim-mode
+                    haskell-mode ghc company-ghc
         ))
 
 (require 'package)
@@ -139,6 +140,7 @@
   :config
   (setq company-idle-delay 0.3)
   (add-to-list 'company-backends 'company-tern)
+  (add-to-list 'company-backends 'company-ghc)
   (global-company-mode))
 
 (use-package yasnippet
@@ -152,6 +154,8 @@
   :ensure t
   :init (global-flycheck-mode)
   :config
+  ;; blacklist
+  ;; (setq flycheck-global-modes '(not haskell-mode))
   (setq flycheck-display-errors-delay 0.1)
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
@@ -216,6 +220,13 @@
 (use-package go-mode
   :config
   (setenv "GOPATH" "/Users/rzhao/workspace/go")
+  )
+
+(use-package ghc
+  :config
+  (autoload 'ghc-init "ghc" nil t)
+  (autoload 'ghc-debug "ghc" nil t)
+  (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
   )
 
 (load-file "~/.emacs.d/elisp/init-hydra.el")

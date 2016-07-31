@@ -13,11 +13,13 @@
 (set-face-attribute 'mode-line-inactive nil
                     :underline nil
                     :overline nil
+                    :box nil
                     ;; :background "#f5eeda"
                     )
 (set-face-attribute 'mode-line-highlight nil
                     :underline nil
                     :overline nil
+                    :box nil
                     ;; :background "#93a1a1"
                     ;; :foreground "#eee8d5"
                     )

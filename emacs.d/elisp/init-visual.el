@@ -15,6 +15,5 @@
 
 (set-face-foreground 'vertical-border "#555555")
 
-
 (provide 'visual)
 ;;; init-visual.el ends here
