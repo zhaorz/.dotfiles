@@ -216,6 +216,7 @@
 (use-package go-mode
   :config
   (setenv "GOPATH" "/Users/rzhao/workspace/go")
+  (add-hook 'before-save-hook 'gofmt-before-save)
   )
 
 (load-file "~/.emacs.d/elisp/init-hydra.el")
