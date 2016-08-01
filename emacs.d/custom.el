@@ -11,7 +11,7 @@
  '(org-agenda-files (quote ("~/tmp/notes.org")))
  '(org-hide-leading-stars t)
  '(powerline-display-hud nil)
- '(powerline-height 22)
+ '(powerline-height 18)
  '(powerline-text-scale-factor nil)
  '(sml/extra-filler 0)
  '(sml/mode-width (quote full))

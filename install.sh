@@ -6,6 +6,7 @@
 IGNORE=(
     ".git"
     ".gitignore"
+    ".gitmodules"
     "README.md"
     ".DS_Store"
     "install.sh"

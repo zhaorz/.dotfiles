@@ -7,18 +7,21 @@
 (set-face-attribute 'mode-line nil
                     :underline nil
                     :overline nil
-                    :background "#eee8d5"
+                    :box nil
+                    ;; :background "#eee8d5"
                     )
 (set-face-attribute 'mode-line-inactive nil
                     :underline nil
                     :overline nil
-                    :background "#f5eeda"
+                    :box nil
+                    ;; :background "#f5eeda"
                     )
 (set-face-attribute 'mode-line-highlight nil
                     :underline nil
                     :overline nil
-                    :background "#93a1a1"
-                    :foreground "#eee8d5"
+                    :box nil
+                    ;; :background "#93a1a1"
+                    ;; :foreground "#eee8d5"
                     )
 
 (defun powerline-custom-theme ()
