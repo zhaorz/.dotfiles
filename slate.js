@@ -5,11 +5,11 @@
 
 // Dimensions
 // ==============================================================================
-var screenRect   = slate.screen().rect();
-var screenLeft   = screenRect.x
-var screenTop    = screenRect.y
-var screenWidth  = screenRect.width
-var screenHeight = screenRect.height
+var screenRect   = function () { return slate.screen().rect(); };
+var screenLeft   = function () { return screenRect().x; };
+var screenTop    = function () { return screenRect().y; };
+var screenWidth  = function () { return screenRect().width; };
+var screenHeight = function () { return screenRect().height; };
 
 
 // Constants
@@ -17,10 +17,10 @@ var screenHeight = screenRect.height
 
 // Boundary between edge of screen and windows
 var padding = {
-  top: 30,
-  bottom: 20,
-  left: 20,
-  right: 20
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0
 };
 
 // Midpoint boundary between adjacent windows
@@ -45,65 +45,65 @@ slate.configAll({
 
 // Keystrokes
 // ==============================================================================
-var hyper = 'cmd;alt;ctrl;shift';
+var hyper = 'ctrl;shift';
 
 
 // Operations
 // ==============================================================================
 var full = slate.operation('move', {
-  x:      screenLeft + padding.left,
-  y:      screenTop  + padding.top,
-  width:  screenWidth  - padding.left - padding.right,
-  height: screenHeight - padding.top  - padding.bottom,
+  x:      screenLeft() + padding.left,
+  y:      screenTop()  + padding.top,
+  width:  screenWidth()  - padding.left - padding.right,
+  height: screenHeight() - padding.top  - padding.bottom,
 });
 
 var leftHalf = slate.operation('move', {
-  x:      screenLeft + padding.left,
-  y:      screenTop + padding.top,
-  width:  screenWidth / 2 - padding.left - gap,
-  height: screenHeight - padding.top - padding.bottom,
+  x:      screenLeft() + padding.left,
+  y:      screenTop() + padding.top,
+  width:  screenWidth() / 2 - padding.left - gap,
+  height: screenHeight() - padding.top - padding.bottom,
 });
 
 var rightHalf = slate.operation('move', {
-  x:      screenLeft + gap + screenWidth / 2,
-  y:      screenTop + padding.top,
-  width:  screenWidth / 2 - padding.left - gap,
-  height: screenHeight - padding.top - padding.bottom,
+  x:      screenLeft() + gap + screenWidth() / 2,
+  y:      screenTop() + padding.top,
+  width:  screenWidth() / 2 - padding.left - gap,
+  height: screenHeight() - padding.top - padding.bottom,
 });
 
 var center = slate.operation('move', {
-  x:      screenLeft + screenWidth  / 6,
-  y:      screenTop  + screenHeight / 6,
-  width:  screenWidth  * 2 / 3,
-  height: screenHeight * 2 / 3,
+  x:      screenLeft() + screenWidth()  / 6,
+  y:      screenTop()  + screenHeight() / 6,
+  width:  screenWidth()  * 2 / 3,
+  height: screenHeight() * 2 / 3,
 });
 
 var topLeft = slate.operation('move', {
-  x:      screenLeft + padding.left,
-  y:      screenTop + padding.top,
-  width:  screenWidth / 2 - padding.left - gap,
-  height: screenHeight / 2 - padding.top - gap,
+  x:      screenLeft() + padding.left,
+  y:      screenTop() + padding.top,
+  width:  screenWidth() / 2 - padding.left - gap,
+  height: screenHeight() / 2 - padding.top - gap,
 });
 
 var topRight = slate.operation('move', {
-  x:      screenLeft + screenWidth / 2 + gap,
-  y:      screenTop + padding.top,
-  width:  screenWidth / 2 - gap - padding.right,
-  height: screenHeight / 2 - padding.top - gap,
+  x:      screenLeft() + screenWidth() / 2 + gap,
+  y:      screenTop() + padding.top,
+  width:  screenWidth() / 2 - gap - padding.right,
+  height: screenHeight() / 2 - padding.top - gap,
 });
 
 var bottomLeft = slate.operation('move', {
-  x:      screenLeft + padding.left,
-  y:      screenTop + screenHeight / 2 + gap,
-  width:  screenWidth / 2 - padding.left - gap,
-  height: screenHeight / 2 - gap - padding.bottom,
+  x:      screenLeft() + padding.left,
+  y:      screenTop() + screenHeight() / 2 + gap,
+  width:  screenWidth() / 2 - padding.left - gap,
+  height: screenHeight() / 2 - gap - padding.bottom,
 });
 
 var bottomRight = slate.operation('move', {
-  x:      screenLeft + screenWidth / 2 + gap,
-  y:      screenTop + screenHeight / 2 + gap,
-  width:  screenWidth / 2 - padding.left - gap,
-  height: screenHeight / 2 - gap - padding.bottom,
+  x:      screenLeft() + screenWidth() / 2 + gap,
+  y:      screenTop() + screenHeight() / 2 + gap,
+  width:  screenWidth() / 2 - padding.left - gap,
+  height: screenHeight() / 2 - gap - padding.bottom,
 });
 
 var focusLeft = slate.operation('focus', {
