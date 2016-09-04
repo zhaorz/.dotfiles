@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import subprocess
+import argparse
+
+parser = argparse.ArgumentParser(description='Mail files in a directory.')
+parser.add_argument('-r', dest='from-addr', type=str,
+                    help='Sets the from address')
+parser.add_argument('-c', dest='cc-addr', type=str,
+                    help='Sets the cc address')
+parser.add_argument('to-addr', type=str,
+                    help='The recepient address')
+args = vars(parser.parse_args())
+
+files = os.listdir(os.getcwd())
+
+print 'Mailing the following files to', args['to-addr']
+print '\n'.join(files)
+
+try:
+    raw_input('Press ENTER to continue, any ctrl+c to abort ...')
+except KeyboardInterrupt:
+    sys.exit(1)
+
+def mailxCommand(f):
+    fromAddr = '-r {}'.format(args['from-addr']) if args['from-addr'] != None else ''
+    ccAddr = '-c {}'.format(args['cc-addr']) if args['cc-addr'] != None else ''
+    return 'mailx -s {} {} {} {} < {}'.format(f, fromAddr, ccAddr, args['to-addr'], f)
+
+for idx, filename in enumerate(files, start=1):
+    cmd = mailxCommand(filename)
+    print '[{}/{}] {}'.format(idx, len(files), cmd)
+    try:
+        subprocess.check_call(cmd, shell=True)
+    except subprocess.CalledProcessError as e:
+        print 'Failed with exit code', e.returncode
+
+print 'Done.'
