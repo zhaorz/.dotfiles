@@ -90,6 +90,7 @@ switcher - s             :   khd -e "mode activate swap"
 switcher - t             :   khd -e "mode activate tree"
 
 switcher - return        :   /usr/bin/osascript /Users/richard/bin/iterm.scpt
+switcher - n             :   /usr/bin/osascript /Users/richard/bin/finder.scpt
 
 switcher - h             :   kwmc window -f west
 switcher - l             :   kwmc window -f east
