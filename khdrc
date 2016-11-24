@@ -1,0 +1,121 @@
+# .khdrc
+
+# Configuration file for khd. Mode triggers use 0x50 (i.e. <f19>). One way to
+# do this is to bind caps_lock to f19 using Karabiner.
+
+# NOTE(koekeishiya): A bind is written in the form:
+#                   <keysym> [!] [<app list>] [->] : <command>
+#                   where
+#                       <keysym>   = mode + mod + ... + mod - literal
+#                       <keysym>   = mode + mod + ... + mod - keycode (must have 0x prefix)
+#                       <keysym>   = mode + mod + ... + mod (modifier only binding)
+#
+#                       [<app,
+#                         app,     = optional list '[app1, ..., appN]' of applications
+#                         app>]      that this bind will be activated for. if the
+#                                    focused application is not contained in this list,
+#                                    the associated command will not be triggered, and
+#                                    the keypress will be passed through as normal.
+#
+#                       [!]        = optional operator '!' negates the behaviour when a
+#                                    list of applications is given. this marks the bind
+#                                    as 'Hotkey_Exclude', causing the bind to not work
+#                                    when the focused application is in the given list.
+#
+#                       [->]       = optional operator '->' that marks this bind as
+#                                    'passthrough'. this causes the key to be passed
+#                                    through to the system, instead of being consumed.
+#
+#                       <command>  = command is executed through '$SHELL -c' and
+#                                    follows valid shell syntax. if the $SHELL environment
+#                                    variable is not set, it will default to '/bin/bash'.
+#                                    when bash is used, the ';' delimeter can be specified
+#                                    to chain commands.
+#
+#                                    to allow a command to extend into multiple lines,
+#                                    prepend '\' at the end of the previous line.
+#
+#                                    an EOL character signifies the end of the bind.
+
+# NOTE(koekeishiya) Example of passthrough
+# cmd - m -> : echo "alert and minimize window" | alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Example of app list
+# alt - e [
+#           iTerm2,
+#           Terminal,
+#           HyperTerm
+#         ]
+#         : echo "so this is how deep the rabbit hole goes.." |\
+#           alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Example of negated app list
+# alt - e [
+#           iTerm2,
+#           Terminal,
+#           HyperTerm
+#         ] !
+#         : echo "blue pill, i choose you!" |\
+#           alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Modifier only binding
+# left shift    -> (    right shift   -> )
+# left cmd      -> {    right cmd     -> }
+
+# khd mod_trigger_timeout 0.1
+# lshift : khd -p "shift - 8"
+# rshift : khd -p "shift - 9"
+# lcmd   : khd -p "shift + alt - 8"
+# rcmd   : khd -p "shift + alt - 9"
+
+# TODO(koekeishiya): possibly allow combined syntax such as
+# [switcher,ytd] + ctrl - f : khd -e "mode activate default"
+
+# Enable kwm compatibility mode
+khd kwm on
+
+# Set mode colors
+khd mode default  color 0x00000000
+khd mode switcher color 0xddbdd322
+khd mode swap     color 0xdd458588
+khd mode tree     color 0xddfabd2f
+
+
+- 0x50             :   khd -e "mode activate switcher"
+switcher - 0x50    :   khd -e "mode activate default"
+swap     - 0x50    :   khd -e "mode activate default"
+tree     - 0x50    :   khd -e "mode activate default"
+
+switcher - s             :   khd -e "mode activate swap"
+switcher - t             :   khd -e "mode activate tree"
+
+switcher - h             :   kwmc window -f west
+switcher - l             :   kwmc window -f east
+switcher - j             :   kwmc window -f south
+switcher - k             :   kwmc window -f north
+
+# Switch to space n
+switcher - 1             :   kwmc space -fExperimental 1
+switcher - 2             :   kwmc space -fExperimental 2
+switcher - 3             :   kwmc space -fExperimental 3
+switcher - 4             :   kwmc space -fExperimental 4
+switcher - 5             :   kwmc space -fExperimental 5
+switcher - 6             :   kwmc space -fExperimental 6
+switcher - 7             :   kwmc space -fExperimental 7
+switcher - 8             :   kwmc space -fExperimental 8
+switcher - 9             :   kwmc space -fExperimental 9
+
+# Throw to left/right space
+switcher + shift - left  :   kwmc window -m space left;\
+                             kwmc space -fExperimental left
+switcher + shift - right :   kwmc window -m space right;\
+                             kwmc space -fExperimental right
+
+# Swap windows
+swap - h                :   kwmc window -s west
+swap - j                :   kwmc window -s south
+swap - k                :   kwmc window -s north
+swap - l                :   kwmc window -s east
+
+
+tree - r                :   kwmc tree rotate 90

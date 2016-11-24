@@ -10,6 +10,9 @@
  '(linum-format (quote dynamic))
  '(org-agenda-files (quote ("~/tmp/notes.org")))
  '(org-hide-leading-stars t)
+ '(package-selected-packages
+   (quote
+    (company-ghc ghc haskell-mode slim-mode magit powerline hydra markdown-mode org-bullets zenburn-theme solarized-theme company-web web-mode emmet-mode key-chord flycheck yasnippet company multi-term helm projectile evil exec-path-from-shell use-package)))
  '(powerline-display-hud nil)
  '(powerline-height 18)
  '(powerline-text-scale-factor nil)
