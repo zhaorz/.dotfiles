@@ -1,13 +1,7 @@
 " Visual
 set cursorline
 syntax enable
-if !has('gui_running')
-  " Compatibility for Terminal
-  let g:solarized_termtrans=1
-  " Make Solarized use 16 colors for Terminal support
-  let g:solarized_termcolors=16
-endif
-set background=light
+
 colorscheme zenburn
 
 " NERDTree
@@ -79,4 +73,7 @@ nnoremap <C-H> <C-W><C-H>
 " Highlights lines over 80 columns in red
 highlight ColorColumn ctermbg=red
 call matchadd('ColorColumn', '\%81v', 100)
+
+" Enable transparent background (let's terminal colors take precedence)
+hi Normal guibg=NONE ctermbg=NONE
 

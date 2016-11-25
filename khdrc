@@ -78,20 +78,18 @@ khd kwm on
 khd mode default  color 0x00000000
 khd mode switcher color 0xddbdd322
 khd mode swap     color 0xdd458588
-khd mode tree     color 0xddfabd2f
 
 
 - 0x50             :   khd -e "mode activate switcher"
 switcher - 0x50    :   khd -e "mode activate default"
 swap     - 0x50    :   khd -e "mode activate default"
-tree     - 0x50    :   khd -e "mode activate default"
 
 switcher - s             :   khd -e "mode activate swap"
-switcher - t             :   khd -e "mode activate tree"
 
-switcher - return        :   /usr/bin/osascript /Users/richard/bin/iterm.scpt
-switcher - n             :   /usr/bin/osascript /Users/richard/bin/finder.scpt
+switcher - return        :   osascript ~/bin/iterm.scpt
+switcher - n             :   osascript ~/bin/finder.scpt
 
+# Switch focus
 switcher - h             :   kwmc window -f west
 switcher - l             :   kwmc window -f east
 switcher - j             :   kwmc window -f south
@@ -120,5 +118,5 @@ swap - j                :   kwmc window -s south
 swap - k                :   kwmc window -s north
 swap - l                :   kwmc window -s east
 
-
-tree - r                :   kwmc tree rotate 90
+# Rotate
+swap - r                :   kwmc tree rotate 90
