@@ -39,8 +39,8 @@ local prompt_string="»"
 # Make prompt_string red if the previous command failed.
 local return_status="%(?:%{$fg[green]%}$prompt_string:%{$fg[red]%}$prompt_string)"
 
-PROMPT='${host_name} ${path_string} ${return_status} %{$reset_color%}'
-
+PROMPT='%{$fg[cyan]%}┌ ${host_name} ${path_string} %{$reset_color%}
+%{$fg[cyan]%}└─── ${return_status} '
 
 #
 # Right Prompt
@@ -49,4 +49,3 @@ PROMPT='${host_name} ${path_string} ${return_status} %{$reset_color%}'
 local time="%{$fg[magenta]%}%*%{$reset_color%}"
 
 RPROMPT='$(git_custom_prompt) ${time}'
-
