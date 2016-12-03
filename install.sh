@@ -12,6 +12,7 @@ IGNORE=(
     "install.sh"
     "bin"
     "kwm"
+    "hammerspoon"
     "oh-my-zsh"
     "oh-my-zsh-custom"
 )
@@ -149,6 +150,14 @@ install_kwm () {
     link_file "$src" "$dst"
 }
 
+install_hammerspoon () {
+    info 'installing hammerspoon'
+    local overwrite_all=false backup_all=false skip_all=false
+    src="$DOTFILES_ROOT/hammerspoon"
+    dst="$HOME/.$(basename "$src")"
+    link_file "$src" "$dst"
+}
+
 install_zsh () {
     info 'installing zsh'
     local overwrite_all=false backup_all=false skip_all=false
@@ -167,6 +176,8 @@ echo ''
 install_bin
 echo ''
 install_zsh
+echo ''
+install_hammerspoon
 
 echo ''
 echo '  All installed!'
