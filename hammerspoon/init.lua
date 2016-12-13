@@ -33,7 +33,11 @@ end)
 
 -- Open a new Finder window
 hotkey.bind(hyper, 'n', function ()
-  local finder = 'tell application "Finder" to make new Finder window'
+  local finder = [[ tell application "Finder"
+    make new Finder window
+end tell
+do shell script "open -a \"Finder\""
+]]
   hs.osascript.applescript(finder)
 end)
 
@@ -67,7 +71,7 @@ local geom   = require 'hs.geometry'
 local gap = 15
 local margin = {
   left   = 20,
-  top    = 40,
+  top    = 20,
   right  = 20,
   bottom = 20
 }
