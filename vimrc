@@ -4,13 +4,14 @@ syntax enable
 colorscheme zenburn
 let g:zenburn_transparent = 1
 
-" NERDTree
-let g:NERDTreeWinSize = 22
-let NERDTreeIgnore = ['\.pyc$']
-
 " Pathogen
 call pathogen#infect()
 call pathogen#helptags()
+Helptags
+
+" NERDTree
+let g:NERDTreeWinSize = 22
+let NERDTreeIgnore = ['\.pyc$']
 
 " airline
 let g:airline_theme='bubblegum'
