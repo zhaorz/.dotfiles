@@ -12,6 +12,20 @@ local hyper = {'cmd', 'alt', 'ctrl', 'shift'}
 
 local hotkey = require 'hs.hotkey'
 
+-- local alertStyle = {
+--    radius = 0,
+--    strokeWidth = 0,
+--    fillColor = { white = 0.1, alpha = 0.8 },
+-- }
+
+hs.alert.defaultStyle.radius = 2
+hs.alert.defaultStyle.textSize = 22
+hs.alert.defaultStyle.textFont = 'Menlo'
+-- hs.alert.defaultStyle.textColor = { white = 1, alpha = 0.95 }
+hs.alert.defaultStyle.textColor = { red = 228/255, green = 161/255, blue = 206/255, alpha = 1 }
+hs.alert.defaultStyle.strokeColor = { white = 1, alpha = 0 }
+hs.alert.defaultStyle.fillColor = { white = 0.2, alpha = 0.9 }
+
 -- Configuration reload
 hotkey.bind(hyper, 'r', function ()
   hs.reload()
@@ -60,6 +74,15 @@ end)
 hotkey.bind(hyper, 'l', function ()
   hs.window.focusWindowEast()
 end)
+
+hotkey.bind(hyper, 'e', function ()
+  hs.application.launchOrFocus('/usr/local/Cellar/emacs/25.1/Emacs.app')
+end)
+
+hotkey.bind(hyper, 'i', function ()
+  hs.application.launchOrFocus('/Applications/iTerm2.app')
+end)
+
 
 --------------------------------------------------------------------------------
 -- Window management -----------------------------------------------------------

@@ -22,6 +22,8 @@ export PATH="$PATH:/usr/local/texlive/2014/bin/x86_64-darwin"
 
 source $ZSH/oh-my-zsh.sh
 
+export PYTHONSTARTUP=~/.pystartup
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
