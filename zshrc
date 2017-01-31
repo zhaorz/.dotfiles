@@ -31,7 +31,7 @@ else
   export EDITOR='vim'
 fi
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 #
 # Alias
