@@ -1,8 +1,8 @@
 " Visual
 set cursorline
 syntax enable
-
 colorscheme zenburn
+let g:zenburn_transparent = 1
 
 " NERDTree
 let g:NERDTreeWinSize = 22
@@ -13,6 +13,7 @@ call pathogen#infect()
 call pathogen#helptags()
 
 " airline
+let g:airline_theme='zenburn'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2 " Always display the statusline in all windows

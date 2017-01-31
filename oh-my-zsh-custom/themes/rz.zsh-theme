@@ -45,7 +45,16 @@ PROMPT='%{$fg[cyan]%}┌ ${host_name} ${path_string} %{$reset_color%}
 #
 # Right Prompt
 #
+#
+
+remote_host_prompt () {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo "%{$fg[cyan]%}$(hostname)"
+  else
+    echo ""
+  fi
+}
 
 local time="%{$fg[magenta]%}%*%{$reset_color%}"
 
-RPROMPT='$(git_custom_prompt) ${time}'
+RPROMPT='$(git_custom_prompt) $(remote_host_prompt) ${time}'
