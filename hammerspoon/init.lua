@@ -21,8 +21,7 @@ local hotkey = require 'hs.hotkey'
 hs.alert.defaultStyle.radius = 2
 hs.alert.defaultStyle.textSize = 22
 hs.alert.defaultStyle.textFont = 'Menlo'
--- hs.alert.defaultStyle.textColor = { white = 1, alpha = 0.95 }
-hs.alert.defaultStyle.textColor = { red = 228/255, green = 161/255, blue = 206/255, alpha = 1 }
+hs.alert.defaultStyle.textColor = { white = 1, alpha = 0.95 }
 hs.alert.defaultStyle.strokeColor = { white = 1, alpha = 0 }
 hs.alert.defaultStyle.fillColor = { white = 0.2, alpha = 0.9 }
 
@@ -223,3 +222,135 @@ hotkey.bind({ 'alt', 'shift' }, 'h',  mover.left,  nil, mover.left)
 hotkey.bind({ 'alt', 'shift' }, 'j',  mover.down,  nil, mover.down)
 hotkey.bind({ 'alt', 'shift' }, 'k',  mover.up,    nil, mover.up)
 hotkey.bind({ 'alt', 'shift' }, 'l',  mover.right, nil, mover.right)
+
+
+--------------------------------------------------------------------------------
+-- Drawing ---------------------------------------------------------------------
+
+local drawing = require 'hs.drawing'
+local timer   = require 'hs.timer'
+
+function drawHints ()
+  local b = box ()
+  local w = 100
+  local h = 80
+
+  local size = geom (b.w/2 - w/2, b.h/2 - h/2, w, h)
+
+  local text = drawing.text(size, 'hello')
+
+  text:show()
+
+  timer.doAfter(3, function () text:delete() end)
+
+end
+
+-- hotkey.bind(hyper, 'space', drawHints)
+
+
+--------------------------------------------------------------------------------
+-- Hydra -----------------------------------------------------------------------
+
+local hydraExitKey = 'space'
+
+function hydraBatteryStatusTrigger ()
+  local minutes = hs.battery.timeRemaining ()
+  local hours = minutes // 60
+
+  minutes = minutes % 60
+  
+  hs.alert.show(string.format('%d:%02d remaining', hours, minutes))
+end
+
+local hydraDefinitions = {
+  {
+    mods  = hyper,
+    key   = 'space',
+    hint  = 'head',
+    actions = {},
+    hydras = {
+      {
+        mods  = '',
+        key   = 'i',
+        hint  = 'info',
+        actions = {
+          { mod = '', key = 'h', hint = 'Draw hello', target = function() drawHints() end },
+          { mod = '', key = 'b', hint = 'Battery', target = function() hydraBatteryStatusTrigger() end }
+        },
+        hydras = {}
+      }
+    }
+  }
+}
+
+function hydraGenerateHintString (hydra)
+  local hintTable = {}
+
+  -- generate child hydras first
+  for _, child in pairs(hydra.hydras) do
+    local hint = child.key .. ':' .. ' ' .. child.hint
+    table.insert(hintTable, hint)
+  end
+
+  -- and then actions
+  for _, child in pairs(hydra.actions) do
+    local hint = child.key .. ':' .. ' ' .. child.hint
+    table.insert(hintTable, hint)
+  end
+
+  return table.concat(hintTable, ' ')
+end
+
+function hydraExitAll ()
+  recurse = function (hydras)
+    for _, hydra in pairs(hydras) do
+      hydra.modal:exit()
+      if next(hydra.hydras) ~= nil then
+        recurse(hydra.hydras)
+      end
+    end
+  end
+  recurse(hydraDefinitions)
+  hs.alert.closeAll(0)
+end
+
+function hydraInit (parentHydra, hydras)
+  if next(hydras) == nil then return end
+
+  -- add modals to each body and bind all actions
+  for _, hydra in pairs(hydras) do
+    -- generate a new modal and put it under its parent
+    hydra.modal = hotkey.modal.new()
+    hydra.modal:bind('', hydraExitKey, function() hydraExitAll () end)
+    if parentHydra ~= nil then
+      parentHydra.modal:bind(hydra.mods, hydra.key, function() hydra.modal:enter() end)
+    else -- global bind
+      hotkey.bind(hydra.mods, hydra.key, function () hydra.modal:enter() end)
+    end
+
+    -- add a hint string
+    hydra.hints = hydraGenerateHintString(hydra)
+    log.i("hydra [" .. hydra.hint .. "] hints: " .. hydra.hints)
+
+    -- for debugging
+    function hydra.modal:entered()
+      hs.alert.closeAll(0)
+      hs.alert.show(hydra.hints, 60)
+      log.i("hydra [" .. hydra.hint .. "] entered")
+    end
+    function hydra.modal:exited()  log.i("hydra [" .. hydra.hint .. "] exited") end
+
+    -- add actions
+    for _, action in ipairs(hydra.actions) do
+      hydra.modal:bind(action.mod, action.key, action.target)
+      log.i("hydra [" .. hydra.hint .. "] binding action" .. action.hint)
+    end
+
+    -- recurse on children
+    hydraInit (hydra, hydra.hydras)
+  end
+end
+
+-- Create all hydras under the head
+hydraInit (nil, hydraDefinitions)
+
