@@ -256,10 +256,27 @@ local hydraExitKey = 'space'
 function hydraBatteryStatusTrigger ()
   local minutes = hs.battery.timeRemaining ()
   local hours = minutes // 60
+  local msg
 
-  minutes = minutes % 60
-  
-  hs.alert.show(string.format('%d:%02d remaining', hours, minutes))
+  if minutes == -2 then
+    msg = 'Power source: power adapter'
+  else
+    minutes = minutes % 60
+    msg = string.format('%d:%02d remaining', hours, minutes)
+  end
+  hs.alert.show(msg)
+end
+
+function hydraBrightnessIncrease ()
+  local current = hs.brightness.get()
+  local target  = math.min(current + 10, 100)
+  hs.brightness.set(target)
+end
+
+function hydraBrightnessDecrease ()
+  local current = hs.brightness.get()
+  local target  = math.max(current - 10, 0)
+  hs.brightness.set(target)
 end
 
 local hydraDefinitions = {
@@ -269,15 +286,50 @@ local hydraDefinitions = {
     hint  = 'head',
     actions = {},
     hydras = {
+      -- info
       {
         mods  = '',
         key   = 'i',
         hint  = 'info',
         actions = {
-          { mod = '', key = 'h', hint = 'Draw hello', target = function() drawHints() end },
           { mod = '', key = 'b', hint = 'Battery', target = function() hydraBatteryStatusTrigger() end }
         },
         hydras = {}
+      },
+
+      -- launcher
+      {
+        mods  = '',
+        key   = 'l',
+        hint  = 'launch',
+        actions = {
+          { mod = '', key = 's', hint = 'Safari', target = function() hs.application.launchOrFocus('Safari') end, exit = true },
+          { mod = '', key = 't', hint = 'iTerm', target = function() hs.application.launchOrFocus('iTerm2') end, exit = true },
+          { mod = '', key = 'p', hint = 'Spotify', target = function() hs.application.launchOrFocus('Spotify') end, exit = true }
+        },
+        hydras = {}
+      },
+
+      -- system
+      {
+        mods  = '',
+        key   = 's',
+        hint  = 'system',
+        actions = {
+          { mod = '', key = 's', hint = 'Screen saver', target = function() hs.caffeinate.startScreensaver() end, exit = true }
+        },
+        hydras = {
+          {
+            mods  = '',
+            key   = 'b',
+            hint  = 'brightness',
+            actions = {
+              { mod = '', key = 'j', hint = '-', target = hydraBrightnessDecrease },
+              { mod = '', key = 'k', hint = '+', target = hydraBrightnessIncrease },
+            },
+            hydras = {}
+          }
+        }
       }
     }
   }
@@ -342,8 +394,11 @@ function hydraInit (parentHydra, hydras)
 
     -- add actions
     for _, action in ipairs(hydra.actions) do
-      hydra.modal:bind(action.mod, action.key, action.target)
-      log.i("hydra [" .. hydra.hint .. "] binding action" .. action.hint)
+      hydra.modal:bind(action.mod, action.key, function ()
+        action.target ()
+        if action.exit then hydraExitAll () end
+      end)
+      log.i("hydra [" .. hydra.hint .. "] binding action " .. action.hint)
     end
 
     -- recurse on children
