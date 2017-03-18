@@ -1,7 +1,11 @@
 # .dotfiles
 
+![screen](./screens/screen.jpg)
+
 A collection of standard configuration files. Easy to move around. No frills
 install script.
+
+## Install
 
 ```bash
 $ cd ~
