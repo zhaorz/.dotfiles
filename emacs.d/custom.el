@@ -12,7 +12,7 @@
  '(org-hide-leading-stars t)
  '(package-selected-packages
    (quote
-    (lua-mode sml-mode company-ghc ghc haskell-mode slim-mode magit powerline hydra markdown-mode org-bullets zenburn-theme solarized-theme company-web web-mode emmet-mode key-chord flycheck yasnippet company multi-term helm projectile evil exec-path-from-shell use-package)))
+    (gruvbox-theme lua-mode sml-mode company-ghc ghc haskell-mode slim-mode magit powerline hydra markdown-mode org-bullets zenburn-theme solarized-theme company-web web-mode emmet-mode key-chord flycheck yasnippet company multi-term helm projectile evil exec-path-from-shell use-package)))
  '(powerline-display-hud nil)
  '(powerline-height 18)
  '(powerline-text-scale-factor nil)

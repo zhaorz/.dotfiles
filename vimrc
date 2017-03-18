@@ -1,8 +1,11 @@
 " Visual
 set cursorline
 syntax enable
-colorscheme zenburn
-let g:zenburn_transparent = 1
+colorscheme gruvbox
+
+" Pretty vertical split
+set fillchars=vert:│    " that's a vertical box-drawing character
+autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE guibg=NONE
 
 " Pathogen
 call pathogen#infect()
@@ -14,11 +17,16 @@ let g:NERDTreeWinSize = 22
 let NERDTreeIgnore = ['\.pyc$']
 
 " airline
-let g:airline_theme='bubblegum'
+let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_left_sep=' '
+let g:airline_right_sep=' '
 set laststatus=2 " Always display the statusline in all windows
 set showtabline=2 " Always display the tabline, even if there is only one tab
+
+" Disable tmuxline
+let g:airline#extensions#tmuxline#enabled = 0
 
 " whitespace
 nmap <F5> :StripWhitespace <CR>
@@ -73,8 +81,8 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Highlights lines over 80 columns in red
-highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%81v', 100)
+" highlight ColorColumn ctermbg=red
+" call matchadd('ColorColumn', '\%81v', 100)
 
 " Enable transparent background (let's terminal colors take precedence)
 hi Normal guibg=NONE ctermbg=NONE

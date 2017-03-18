@@ -5,7 +5,7 @@
 
 ;;; Code:
 
-(load-theme 'zenburn t)
+(load-theme 'gruvbox t)
 (add-to-list 'default-frame-alist
              '(font . "Menlo 12"))
 (setq ns-use-srgb-colorspace nil) ; fix weird colors in powerline

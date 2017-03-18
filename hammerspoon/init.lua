@@ -37,7 +37,7 @@ hs.alert.show('Config loaded')
 
 -- Open a new iTerm window
 hotkey.bind(hyper, 't', function ()
-  local iterm = [[ tell application "iTerm2"
+  local iterm = [[ tell application "iTerm"
   create window with default profile
 end tell
 ]]
@@ -79,7 +79,7 @@ hotkey.bind(hyper, 'e', function ()
 end)
 
 hotkey.bind(hyper, 'i', function ()
-  hs.application.launchOrFocus('/Applications/iTerm2.app')
+  hs.application.launchOrFocus('/Applications/iTerm.app')
 end)
 
 
@@ -127,6 +127,17 @@ function resizer.center ()
   local t = b.h / 6
   local w = b.w * 2 / 3
   local h = b.h * 2 / 3
+
+  win:move(geom(l, t, w, h), nil, nil, 0)
+end
+
+function resizer.reading ()
+  local win = fWin ()
+  local b = box ()
+  local l = b.w / 6
+  local t = margin.top
+  local w = b.w * 2 / 3
+  local h = b.h - margin.top - margin.bottom
 
   win:move(geom(l, t, w, h), nil, nil, 0)
 end
@@ -286,13 +297,15 @@ local hydraDefinitions = {
     hint  = 'head',
     actions = {},
     hydras = {
-      -- info
+      -- window
       {
         mods  = '',
-        key   = 'i',
-        hint  = 'info',
+        key   = 'w',
+        hint  = 'window',
         actions = {
-          { mod = '', key = 'b', hint = 'Battery', target = function() hydraBatteryStatusTrigger() end }
+          { mod = '', key = 'c', hint = 'center', target = function() resizer.center() end, exit = false },
+          { mod = '', key = 'f', hint = 'full', target = function() resizer.full() end, exit = false },
+          { mod = '', key = 'r', hint = 'reading', target = function() resizer.reading() end, exit = false },
         },
         hydras = {}
       },
@@ -304,8 +317,19 @@ local hydraDefinitions = {
         hint  = 'launch',
         actions = {
           { mod = '', key = 's', hint = 'Safari', target = function() hs.application.launchOrFocus('Safari') end, exit = true },
-          { mod = '', key = 't', hint = 'iTerm', target = function() hs.application.launchOrFocus('iTerm2') end, exit = true },
+          { mod = '', key = 't', hint = 'iTerm', target = function() hs.application.launchOrFocus('iTerm') end, exit = true },
           { mod = '', key = 'p', hint = 'Spotify', target = function() hs.application.launchOrFocus('Spotify') end, exit = true }
+        },
+        hydras = {}
+      },
+
+      -- info
+      {
+        mods  = '',
+        key   = 'i',
+        hint  = 'info',
+        actions = {
+          { mod = '', key = 'b', hint = 'Battery', target = function() hydraBatteryStatusTrigger() end }
         },
         hydras = {}
       },
