@@ -287,22 +287,86 @@ hotkey.bind({ 'alt', 'shift' }, 'l',  mover.right, nil, mover.right)
 local drawing = require 'hs.drawing'
 local timer   = require 'hs.timer'
 
-function drawHints ()
-  local b = box ()
-  local w = 100
-  local h = 80
+local hints = {
+  -- font = 'Lato Light',
+  font = 'Lato Light',
+  size = 24,
+  width = 200,
+  duration = 2,
+  fadeIn = 0.3,
+  fadeOut = 0.3,
+}
 
-  local size = geom (b.w/2 - w/2, b.h/2 - h/2, w, h)
+local colors = {
+  orange = { red = 214 / 255, green = 93 / 255, blue = 14 / 255, alpha = 0.9 },
+  green  = { red = 152 / 255, green = 151 / 255, blue = 26 / 255, alpha = 0.9 },
+  blue = { red = 69 / 255, green = 133 / 255, blue = 136 / 255, alpha = 0.9 },
+  grey = { red = 0, green = 0, blue = 0, alpha = 0.4 }
+}
 
-  local text = drawing.text(size, 'hello')
-
-  text:show()
-
-  timer.doAfter(3, function () text:delete() end)
-
+-- Create a circle centered at (x, y) with radius r.
+function hints.circle (x, y, r, color)
+  local c = drawing.circle(geom(x - r, y - r, 2 * r, 2 * r))
+  c:setStroke(false)
+  c:setFillColor(color)
+  return c
 end
 
--- hotkey.bind(hyper, 'space', drawHints)
+function hints.background ()
+  local b = box ()
+  local rect = drawing.rectangle(geom(0, 0, b.w, b.h))
+                 :setStroke(false)
+                 :setFillColor(colors.grey)
+  return {
+    show = function ()
+      rect:show(hints.fadeIn)
+    end,
+    hide = function ()
+      rect:hide(hints.fadeOut)
+    end
+  }
+end
+
+function hints.hint (x, y, key, msg, color)
+  local radius = hints.size
+  local circle = hints.circle(x + radius, y + radius, radius, color)
+  local keyBox = hs.drawing.getTextDrawingSize(key, {
+    font = hints.font, size = hints.size, alignment = 'center',
+  })
+  keyBox.w = keyBox.w + 3 -- known fudge factor (see getTextDrawingSize docs)
+
+  local left = x + radius - keyBox.w / 2
+  local top  = y + radius - keyBox.h / 2 - 5 -- lower case keys
+
+  local keyText = hs.drawing.text(geom(left, top, keyBox.w, keyBox.h), key)
+                   :setTextFont(hints.font)
+                   :setTextSize(hints.size)
+
+  local msgBox = hs.drawing.getTextDrawingSize(msg, {
+    font = hints.font, size = hints.size, alignment = 'left',
+  })
+  msgBox.w = msgBox.w + hints.size
+  if msgBox.w > hints.width then
+    log.i('width ' .. msgBox.w .. ' of hint ' .. msg .. ' too large')
+  end
+
+  local msgText = hs.drawing.text(geom(left + hints.size * 2, top, hints.width, msgBox.h), msg)
+                    :setTextFont(hints.font)
+                    :setTextSize(hints.size)
+
+  return {
+    show = function ()
+      circle:show(hints.fadeIn)
+      keyText:show(hints.fadeIn)
+      msgText:show(hints.fadeIn)
+    end,
+    hide = function ()
+      circle:hide(hints.fadeOut)
+      keyText:hide(hints.fadeOut)
+      msgText:hide(hints.fadeOut)
+    end
+  }
+end
 
 
 --------------------------------------------------------------------------------
@@ -341,6 +405,7 @@ local hydraDefinitions = {
     mods  = hyper,
     key   = 'space',
     hint  = 'head',
+    master = true,
     actions = {},
     hydras = {
       -- window
@@ -405,35 +470,74 @@ local hydraDefinitions = {
   }
 }
 
-function hydraGenerateHintString (hydra)
+function tableLen(T)
+  local count = 0
+  for k, v in pairs(T) do
+    count = count + 1
+  end
+  return count
+end
+
+function hydraGenerateHints (hydra)
+  local b = box ()
   local hintTable = {}
+
+  local numHints = tableLen(hydra.hydras) + tableLen(hydra.actions)
+  local height = hints.size * 2 + hints.size / 2
+  local totalHeight = numHints * height
+
+  local left = b.w / 2 - hints.width / 2
+  local top  = b.h / 2 - totalHeight / 2
+
+  local y = top
 
   -- generate child hydras first
   for _, child in pairs(hydra.hydras) do
-    local hint = child.key .. ':' .. ' ' .. child.hint
+    local hint = hints.hint(left, y, child.key, child.hint, colors.blue)
     table.insert(hintTable, hint)
+    y = y + height
   end
 
   -- and then actions
   for _, child in pairs(hydra.actions) do
-    local hint = child.key .. ':' .. ' ' .. child.hint
+    local hint
+    if child.exit then
+      hint = hints.hint(left, y, child.key, child.hint, colors.orange)
+    else
+      hint = hints.hint(left, y, child.key, child.hint, colors.green)
+    end
     table.insert(hintTable, hint)
+    y = y + height
   end
 
-  return table.concat(hintTable, ' ')
+  return {
+    show = function ()
+      for _, hint in pairs(hintTable) do
+        hint.show()
+      end
+    end,
+    hide = function ()
+      for _, hint in pairs(hintTable) do
+        hint.hide()
+      end
+    end
+  }
 end
 
-function hydraExitAll ()
+function hydraExitAllAndHideHints ()
   recurse = function (hydras)
     for _, hydra in pairs(hydras) do
+      if hydra.master ~= nil and hydra.master == true then
+        hydra.background.hide()
+      end
       hydra.modal:exit()
+      hydra.hints.hide()
       if next(hydra.hydras) ~= nil then
         recurse(hydra.hydras)
       end
     end
   end
   recurse(hydraDefinitions)
-  hs.alert.closeAll(0)
 end
 
 function hydraInit (parentHydra, hydras)
@@ -443,30 +547,40 @@ function hydraInit (parentHydra, hydras)
   for _, hydra in pairs(hydras) do
     -- generate a new modal and put it under its parent
     hydra.modal = hotkey.modal.new()
-    hydra.modal:bind('', hydraExitKey, function() hydraExitAll () end)
-    if parentHydra ~= nil then
-      parentHydra.modal:bind(hydra.mods, hydra.key, function() hydra.modal:enter() end)
-    else -- global bind
-      hotkey.bind(hydra.mods, hydra.key, function () hydra.modal:enter() end)
+    hydra.modal:bind('', hydraExitKey, function() hydraExitAllAndHideHints () end)
+
+    -- global bind of master
+    if hydra.master ~= nil and hydra.master == true then
+      hydra.background = hints.background ()
+      hotkey.bind(hydra.mods, hydra.key, function () 
+        hydra.background.show()
+        hydra.modal:enter() 
+      end)
+    else
+      parentHydra.modal:bind(hydra.mods, hydra.key, function() 
+        parentHydra.modal:exit()
+        hydra.modal:enter() 
+      end)
     end
 
-    -- add a hint string
-    hydra.hints = hydraGenerateHintString(hydra)
-    log.i("hydra [" .. hydra.hint .. "] hints: " .. hydra.hints)
+    -- add the hint drawing objects
+    hydra.hints = hydraGenerateHints(hydra)
 
     -- for debugging
     function hydra.modal:entered()
-      hs.alert.closeAll(0)
-      hs.alert.show(hydra.hints, 60)
+      hydra.hints.show()
       log.i("hydra [" .. hydra.hint .. "] entered")
     end
-    function hydra.modal:exited()  log.i("hydra [" .. hydra.hint .. "] exited") end
+    function hydra.modal:exited() 
+      hydra.hints.hide()
+      log.i("hydra [" .. hydra.hint .. "] exited") 
+    end
 
     -- add actions
     for _, action in ipairs(hydra.actions) do
       hydra.modal:bind(action.mod, action.key, function ()
         action.target ()
-        if action.exit then hydraExitAll () end
+        if action.exit then hydraExitAllAndHideHints () end
       end)
       log.i("hydra [" .. hydra.hint .. "] binding action " .. action.hint)
     end
