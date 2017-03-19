@@ -162,6 +162,48 @@ function resizer.right ()
   win:move(geom(l, t, w, h), nil, nil, 0)
 end
 
+function resizer.northEast ()
+  local win = fWin ()
+  local b = box ()
+  local t = margin.top
+  local w = b.w / 2 - margin.left - gap / 2
+  local h = b.h / 2 - margin.top - gap / 2
+
+  win:move(geom(margin.left, t, w, h), nil, nil, 0)
+end
+
+function resizer.southEast ()
+  local win = fWin ()
+  local b = box ()
+  local t = b.h / 2 + gap / 2
+  local w = b.w / 2 - margin.left - gap / 2
+  local h = b.h / 2 - margin.bottom - gap / 2
+
+  win:move(geom(margin.left, t, w, h), nil, nil, 0)
+end
+
+function resizer.northWest ()
+  local win = fWin ()
+  local b = box ()
+  local l = b.w / 2 + gap / 2
+  local t = margin.top
+  local w = b.w / 2 - margin.left - gap / 2
+  local h = b.h / 2 - margin.top - gap / 2
+
+  win:move(geom(l, t, w, h), nil, nil, 0)
+end
+
+function resizer.southWest ()
+  local win = fWin ()
+  local b = box ()
+  local l = b.w / 2 + gap / 2
+  local t = b.h / 2 + gap / 2
+  local w = b.w / 2 - margin.left - gap / 2
+  local h = b.h / 2 - margin.bottom - gap / 2
+
+  win:move(geom(l, t, w, h), nil, nil, 0)
+end
+
 function resizer.shrinkLeft ()
   local win = fWin ()
   local s = win:size()
@@ -223,6 +265,10 @@ hotkey.bind(hyper, 'f',     resizer.full)
 hotkey.bind(hyper, 'c',     resizer.center)
 hotkey.bind(hyper, 'left',  resizer.left)
 hotkey.bind(hyper, 'right', resizer.right)
+hotkey.bind(hyper, '-', resizer.northEast)
+hotkey.bind(hyper, '=', resizer.northWest)
+hotkey.bind(hyper, '[', resizer.southEast)
+hotkey.bind(hyper, ']', resizer.southWest)
 
 hotkey.bind({ 'alt' }, 'left',  resizer.shrinkLeft, nil, resizer.shrinkLeft)
 hotkey.bind({ 'alt' }, 'right', resizer.expandRight, nil, resizer.expandRight)
