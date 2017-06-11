@@ -427,6 +427,8 @@ local hydraDefinitions = {
         key   = 'l',
         hint  = 'launch',
         actions = {
+          { mod = '', key = 'c', hint = 'Calendar', target = function() hs.application.launchOrFocus('Calendar') end, exit = true },
+          { mod = '', key = 'e', hint = 'Emacs', target = function() hs.application.launchOrFocus('Emacs') end, exit = true },
           { mod = '', key = 's', hint = 'Safari', target = function() hs.application.launchOrFocus('Safari') end, exit = true },
           { mod = '', key = 't', hint = 'iTerm', target = function() hs.application.launchOrFocus('iTerm') end, exit = true },
           { mod = '', key = 'p', hint = 'Spotify', target = function() hs.application.launchOrFocus('Spotify') end, exit = true }
@@ -552,14 +554,14 @@ function hydraInit (parentHydra, hydras)
     -- global bind of master
     if hydra.master ~= nil and hydra.master == true then
       hydra.background = hints.background ()
-      hotkey.bind(hydra.mods, hydra.key, function () 
+      hotkey.bind(hydra.mods, hydra.key, function ()
         hydra.background.show()
-        hydra.modal:enter() 
+        hydra.modal:enter()
       end)
     else
-      parentHydra.modal:bind(hydra.mods, hydra.key, function() 
+      parentHydra.modal:bind(hydra.mods, hydra.key, function()
         parentHydra.modal:exit()
-        hydra.modal:enter() 
+        hydra.modal:enter()
       end)
     end
 
@@ -571,9 +573,9 @@ function hydraInit (parentHydra, hydras)
       hydra.hints.show()
       log.i("hydra [" .. hydra.hint .. "] entered")
     end
-    function hydra.modal:exited() 
+    function hydra.modal:exited()
       hydra.hints.hide()
-      log.i("hydra [" .. hydra.hint .. "] exited") 
+      log.i("hydra [" .. hydra.hint .. "] exited")
     end
 
     -- add actions
