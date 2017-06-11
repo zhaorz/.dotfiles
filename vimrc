@@ -12,10 +12,6 @@ call pathogen#infect()
 call pathogen#helptags()
 Helptags
 
-" NERDTree
-let g:NERDTreeWinSize = 22
-let NERDTreeIgnore = ['\.pyc$']
-
 " airline
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
@@ -29,14 +25,16 @@ set showtabline=2 " Always display the tabline, even if there is only one tab
 let g:airline#extensions#tmuxline#enabled = 0
 
 " whitespace
-nmap <F5> :StripWhitespace <CR>
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 set nocompatible
 filetype plugin indent on
 syntax on
 
 " System clipboard
-set clipboard=unnamed
+if $TMUX == ''
+  set clipboard=unnamed
+endif
 set hidden
 set wildmenu
 set showcmd
@@ -70,7 +68,6 @@ set shiftwidth=2
 map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 imap jk <Esc>
-nnoremap <C-_> :NERDTreeToggle<CR>
 nnoremap ; :
 nnoremap <F6> :CtrlPClearCache<CR>
 
