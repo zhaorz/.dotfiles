@@ -10,7 +10,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM="$HOME/.oh-my-zsh-custom"
 ZSH_THEME="rz"
 
-plugins=(git rake-fast)
+plugins=(git zsh-syntax-highlighting)
 fpath=(~/.oh-my-zsh-custom/completions $fpath)
 autoload -Uz compinit && compinit -i
 
@@ -35,7 +35,7 @@ if [ -n "$VIRTUAL_ENV" ]; then
   . "$VIRTUAL_ENV/bin/activate"
 fi
 
-# eval "$(rbenv init -)"
+eval "$(rbenv init -)"
 
 #
 # Alias
