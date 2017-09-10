@@ -102,6 +102,8 @@ local screen = require 'hs.screen'
 local window = require 'hs.window'
 local geom   = require 'hs.geometry'
 
+window.animationDuration = 0.0
+
 local gap = 15
 local margin = {
   left   = 20,
@@ -116,7 +118,8 @@ local resizer = {}
 local mover   = {}
 
 function box ()
-  return screen.mainScreen():currentMode()
+  local mode = screen.mainScreen():currentMode()
+  return mode
 end
 
 function fWin ()
@@ -124,96 +127,111 @@ function fWin ()
 end
 
 function resizer.full ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
+  local l = margin.left
+  local t = margin.top
   local w = b.w - margin.left - margin.right
   local h = b.h - margin.top - margin.bottom
 
-  win:move(geom(margin.left, margin.top, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.center ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
   local l = b.w / 6
   local t = b.h / 6
   local w = b.w * 2 / 3
   local h = b.h * 2 / 3
 
-  win:move(geom(l, t, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.reading ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
   local l = b.w / 6
   local t = margin.top
   local w = b.w * 2 / 3
   local h = b.h - margin.top - margin.bottom
 
-  win:move(geom(l, t, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.left ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
+  local l = margin.left
+  local t = margin.top
   local w = b.w / 2 - margin.left - gap / 2
   local h = b.h - margin.top - margin.bottom
 
-  win:move(geom(margin.left, margin.top, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.right ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
   local l = b.w / 2 + gap / 2
   local t = margin.top
   local w = b.w / 2 - margin.left - gap / 2
   local h = b.h - margin.top - margin.bottom
 
-  win:move(geom(l, t, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.northEast ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
+  local l = margin.left
   local t = margin.top
   local w = b.w / 2 - margin.left - gap / 2
   local h = b.h / 2 - margin.top - gap / 2
 
-  win:move(geom(margin.left, t, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.southEast ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
+  local l = margin.left
   local t = b.h / 2 + gap / 2
   local w = b.w / 2 - margin.left - gap / 2
   local h = b.h / 2 - margin.bottom - gap / 2
 
-  win:move(geom(margin.left, t, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.northWest ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
   local l = b.w / 2 + gap / 2
   local t = margin.top
   local w = b.w / 2 - margin.left - gap / 2
   local h = b.h / 2 - margin.top - gap / 2
 
-  win:move(geom(l, t, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.southWest ()
-  local win = fWin ()
-  local b = box ()
+  local win = fWin()
+  local screen = win:screen()
+  local b = screen:frame()
   local l = b.w / 2 + gap / 2
   local t = b.h / 2 + gap / 2
   local w = b.w / 2 - margin.left - gap / 2
   local h = b.h / 2 - margin.bottom - gap / 2
 
-  win:move(geom(l, t, w, h), nil, nil, 0)
+  win:setFrame(screen:localToAbsolute(l, t, w, h))
 end
 
 function resizer.shrinkLeft ()
