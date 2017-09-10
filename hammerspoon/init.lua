@@ -66,6 +66,16 @@ do shell script "open -a \"Finder\""
   hs.osascript.applescript(finder)
 end)
 
+-- Open a new Safari window
+hotkey.bind(hyper, 's', function ()
+  local safari = [[ tell application "Safari"
+    make new document
+end tell
+]]
+  hs.osascript.applescript(safari)
+  hs.application.launchOrFocus('Safari')
+end)
+
 
 --------------------------------------------------------------------------------
 -- Focus -----------------------------------------------------------------------
