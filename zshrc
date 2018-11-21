@@ -15,6 +15,7 @@ fpath=(~/.oh-my-zsh-custom/completions $fpath)
 autoload -Uz compinit && compinit -i
 
 # Paths
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:/usr/local/opt/ruby/bin:$PATH"
@@ -35,7 +36,7 @@ if [ -n "$VIRTUAL_ENV" ]; then
   . "$VIRTUAL_ENV/bin/activate"
 fi
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 #
 # Alias
@@ -47,7 +48,10 @@ alias .....="cd ../../../.."
 
 alias g="git"
 alias gs="git status"
-alias gac='git add -A && git commit '
+alias gbv="git branch -vv"
+
+alias mk="make -j4"
+alias mc="make clean"
 
 alias sml="rlwrap sml"
 alias ocaml="rlwrap ocaml"
@@ -56,5 +60,6 @@ alias work="cd ~/Documents/workspace"
 alias cmu="cd ~/Documents/academics"
 alias web="cd ~/Documents/web/zhaorz.github.io/"
 alias cpp="cd ~/Documents/c++/"
+alias csa="cd ~/src/academy"
 
 alias please="sudo"

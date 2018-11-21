@@ -117,7 +117,7 @@ window.animationDuration = 0.0
 local gap = 15
 local margin = {
   left   = 20,
-  top    = 20,
+  top    = 35,
   right  = 20,
   bottom = 20
 }

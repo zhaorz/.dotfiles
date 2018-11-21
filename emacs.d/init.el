@@ -7,19 +7,21 @@
 (setq package-list
       '(use-package diminish exec-path-from-shell evil
                     projectile helm multi-term tramp
-                    whitespace company yasnippet flycheck
+                    whitespace company yasnippet
                     key-chord emmet-mode web-mode
                     company-web solarized-theme zenburn-theme
                     org-bullets markdown-mode
                     hydra powerline
                     magit slim-mode
                     haskell-mode ghc company-ghc
+                    rjsx-mode
         ))
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'load-path "~/.emacs.d/plugins/")
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -149,18 +151,17 @@
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/yasnippet-snippets")
   (yas-global-mode 1))
 
-(use-package flycheck
-  :diminish "ƒ✓"
-  :ensure t
-  :init (global-flycheck-mode)
-  :config
-  ;; blacklist
-  ;; (setq flycheck-global-modes '(not haskell-mode))
-  (setq flycheck-display-errors-delay 0.1)
-  (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(javascript-jshint)))
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
+;; (use-package flycheck
+;;   :diminish "ƒ✓"
+;;   :ensure t
+;;   :init (global-flycheck-mode)
+;;   :config
+;;   ;; blacklist
+;;   ;; (setq flycheck-global-modes '(not haskell-mode))
+;;   (setq flycheck-display-errors-delay 0.1)
+;;   (setq-default flycheck-disabled-checkers
+;;                 (append flycheck-disabled-checkers
+;;                         '(javascript-jshint))))
 
 (use-package key-chord
   :config
@@ -175,11 +176,14 @@
   (add-hook 'css-mode-hook  'emmet-mode)
   (add-hook 'web-mode-hook  'emmet-mode))
 
+(use-package rjsx-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . rjsx-mode)))
+
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -229,6 +233,9 @@
   (autoload 'ghc-debug "ghc" nil t)
   (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
   )
+
+(use-package tutch-mode
+  :mode ("\\.tut\\'" . tutch-mode))
 
 (load-file "~/.emacs.d/elisp/init-hydra.el")
 
