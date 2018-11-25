@@ -1,46 +1,31 @@
-" Visual
-set cursorline
-syntax enable
-colorscheme gruvbox
+" vimrc
+" ------------------------------------------------------------------------------
+" Richard Zhao
+" <richard@rzhao.io>
 
-" Pretty vertical split
-set fillchars=vert:│    " that's a vertical box-drawing character
-autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE guibg=NONE
 
-" Pathogen
-call pathogen#infect()
-call pathogen#helptags()
-Helptags
+" ------------------------------------------------------------------------------
+" Plugins
 
-" airline
-let g:airline_theme='gruvbox'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_left_sep=' '
-let g:airline_right_sep=' '
-set laststatus=2 " Always display the statusline in all windows
-set showtabline=2 " Always display the tabline, even if there is only one tab
+" TODO Use Plugged
 
-" Disable tmuxline
-let g:airline#extensions#tmuxline#enabled = 0
-
-" whitespace
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+" ------------------------------------------------------------------------------
+" General
 
 set nocompatible
 filetype plugin indent on
 syntax on
+syntax enable
 
 " System clipboard
 if $TMUX == ''
   set clipboard=unnamed
 endif
+
 set hidden
 set wildmenu
 set showcmd
 set hlsearch
-
-" Usability options
 set ignorecase
 set smartcase
 set backspace=indent,eol,start
@@ -57,19 +42,19 @@ set notimeout ttimeout ttimeoutlen=200
 set pastetoggle=<F10>
 set ttyfast
 
-" Indentation options
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set shiftwidth=2
-
+" ------------------------------------------------------------------------------
 " Mappings
-map Y y$
-nnoremap <C-L> :nohl<CR><C-L>
+
+let mapleader=" "
+
+nnoremap <Leader>r :source ~/.vimrc<CR>:echo "Reloaded vimrc."<CR>
+
 imap jk <Esc>
 nnoremap ; :
-nnoremap <F6> :CtrlPClearCache<CR>
+nnoremap Y y$
+
+" Strip trailing whitespace
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " Easier split switching
 nnoremap <C-J> <C-W><C-J>
@@ -77,10 +62,53 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Highlights lines over 80 columns in red
-" highlight ColorColumn ctermbg=red
-" call matchadd('ColorColumn', '\%81v', 100)
+" ------------------------------------------------------------------------------
+" Visual
+
+colorscheme gruvbox
+
+set cursorline
+set fillchars=vert:│
 
 " Enable transparent background (let's terminal colors take precedence)
 hi Normal guibg=NONE ctermbg=NONE
+
+augroup BlendVertSplit
+  autocmd!
+  autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE guibg=NONE
+augroup END
+
+" ------------------------------------------------------------------------------
+" Editing
+
+" TODO: Use editorconfig
+set expandtab
+
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set shiftwidth=2
+
+" ------------------------------------------------------------------------------
+" Statusline
+
+function! ReadOnlyFlag() abort
+  if &readonly
+    return ''
+  else
+    return ''
+  endif
+endfunction
+
+set statusline=\ %f
+set statusline+=\ %m    " Modified flag
+set statusline+=\ %{ReadOnlyFlag()}    " Read-only flag
+
+set statusline+=%=      " LHR/RHS delimeter
+
+set statusline+=%y      " File type
+set statusline+=\ %3p%%    " Percentage through file
+set statusline+=\      " Make sure you have powerline glyphs
+set statusline+=\ %5l\ :\ %-3c    " Line : column
+
 
