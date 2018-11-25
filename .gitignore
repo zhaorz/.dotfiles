@@ -17,3 +17,6 @@ emacs.d/tramp
 emacs.d/tmp
 
 emacs.d/projectile*
+
+# Vim
+plugged

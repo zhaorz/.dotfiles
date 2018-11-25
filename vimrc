@@ -7,7 +7,11 @@
 " ------------------------------------------------------------------------------
 " Plugins
 
-" TODO Use Plugged
+call plug#begin('~/.vim/plugged')
+
+Plug 'godlygeek/tabular'
+
+call plug#end()
 
 " ------------------------------------------------------------------------------
 " General
@@ -62,6 +66,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+vmap <Leader>a= :Tabularize /=
+vmap <Leader>a: :Tabularize /:
+
 " ------------------------------------------------------------------------------
 " Visual
 
@@ -100,15 +107,17 @@ function! ReadOnlyFlag() abort
   endif
 endfunction
 
-set statusline=\ %f
-set statusline+=\ %m    " Modified flag
-set statusline+=\ %{ReadOnlyFlag()}    " Read-only flag
+set statusline=\ %f\                 " File path
+set statusline+=\ %m                  " Modified flag
+set statusline+=\ %{ReadOnlyFlag()}   " Read-only flag
 
-set statusline+=%=      " LHR/RHS delimeter
+set statusline+=%=                    " LHR/RHS delimeter
 
-set statusline+=%y      " File type
-set statusline+=\ %3p%%    " Percentage through file
-set statusline+=\      " Make sure you have powerline glyphs
-set statusline+=\ %5l\ :\ %-3c    " Line : column
+set statusline+=%y                    " File type
+set statusline+=\ \ %{&fileencoding} " File encoding
+set statusline+=\ \ %3p%%            " Percentage through file
+set statusline+=\                    " Make sure you have powerline glyphs
+set statusline+=\ \ %5l\ :\ %-3c     " Line : column
 
-
+highlight StatusLine   ctermfg=239 ctermbg=246
+highlight StatusLineNC ctermfg=238 ctermbg=244
