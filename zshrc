@@ -63,3 +63,6 @@ alias cpp="cd ~/Documents/c++/"
 alias csa="cd ~/src/academy"
 
 alias please="sudo"
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
