@@ -10,6 +10,8 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf.vim'
+Plug '~/.fzf'
 
 call plug#end()
 
@@ -68,6 +70,12 @@ nnoremap <C-H> <C-W><C-H>
 
 vmap <Leader>a= :Tabularize /=
 vmap <Leader>a: :Tabularize /:
+
+" fzf
+nnoremap <Leader>e :Files<CR>
+nnoremap <Leader>f :Buffers<CR>
+nnoremap <Leader>l :Lines<CR>
+nnoremap <Leader>; :Commands<CR>
 
 " ------------------------------------------------------------------------------
 " Visual
