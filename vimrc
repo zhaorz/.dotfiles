@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf.vim'
+Plug 'morhetz/gruvbox'
 Plug '~/.fzf'
 
 call plug#end()
@@ -80,6 +81,7 @@ nnoremap <Leader>; :Commands<CR>
 " ------------------------------------------------------------------------------
 " Visual
 
+set background=dark
 colorscheme gruvbox
 
 set cursorline
@@ -88,10 +90,10 @@ set fillchars=vert:│
 " Enable transparent background (let's terminal colors take precedence)
 hi Normal guibg=NONE ctermbg=NONE
 
-augroup BlendVertSplit
-  autocmd!
-  autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE guibg=NONE
-augroup END
+" augroup BlendVertSplit
+"   autocmd!
+"   autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE guibg=NONE
+" augroup END
 
 " ------------------------------------------------------------------------------
 " Editing
@@ -126,6 +128,3 @@ set statusline+=\ \ %{&fileencoding} " File encoding
 set statusline+=\ \ %3p%%            " Percentage through file
 set statusline+=\                    " Make sure you have powerline glyphs
 set statusline+=\ \ %5l\ :\ %-3c     " Line : column
-
-highlight StatusLine   ctermfg=239 ctermbg=246
-highlight StatusLineNC ctermfg=238 ctermbg=244
