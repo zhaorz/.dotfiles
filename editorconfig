@@ -12,7 +12,10 @@ indent_style = space
 charset = utf-8
 insert_final_newline = true
 
-[*.{js,py,c,h,cc,cpp}]
+[{Makefile,makefile,*.mk}]
+indent_style = tab
+
+[*.{js,py,c,h,cc,cpp,cxx}]
 indent_size = 4
 
 [*.{html, c0}]

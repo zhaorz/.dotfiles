@@ -9,8 +9,12 @@
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'Yggdroot/indentLine'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'tpope/vim-commentary'
 Plug '~/.fzf'
 
 call plug#end()
@@ -47,6 +51,8 @@ set number
 set notimeout ttimeout ttimeoutlen=200
 set pastetoggle=<F10>
 set ttyfast
+
+let g:indentLine_char = '│'
 
 " ------------------------------------------------------------------------------
 " Mappings
@@ -103,6 +109,10 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set shiftwidth=2
+
+" C++ options
+set cino+=N-s
+set cino+=g0
 
 " ------------------------------------------------------------------------------
 " Statusline
