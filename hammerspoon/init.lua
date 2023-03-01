@@ -49,7 +49,7 @@ end)
 
 -- Open a new iTerm window
 hotkey.bind(hyper, 't', function ()
-  local iterm = [[ tell application "iTerm"
+  local iterm = [[ tell application "iTerm2"
   create window with default profile
 end tell
 ]]
@@ -116,10 +116,10 @@ window.animationDuration = 0.0
 
 local gap = 15
 local margin = {
-  left   = 20,
-  top    = 35,
-  right  = 20,
-  bottom = 20
+  left   =  10,
+  top    =  45,
+  right  =  10,
+  bottom = -25
 }
 
 local delta = 50                -- For resizing and moving
@@ -132,6 +132,8 @@ function box ()
   return mode
 end
 
+-- If this doesn't work, make sure you grant Privacy>Accessibility priveleges
+-- to Hammerspoon in System Preferences
 function fWin ()
   return window.focusedWindow()
 end
