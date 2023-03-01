@@ -45,3 +45,4 @@ export NVM_DIR="/Users/rzhao/.nvm"
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"

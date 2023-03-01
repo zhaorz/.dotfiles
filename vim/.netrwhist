@@ -1,10 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/Richard/Documents/programming/c/lib'
-let g:netrw_dirhist_2='/Users/Richard/Documents/programming/c/lib/queue'
-let g:netrw_dirhist_3='/Users/richard/src/academy/react-example/.sonarlint'
-let g:netrw_dirhist_4='/Users/richard'
-let g:netrw_dirhist_5='/Users/richard/.hammerspoon'
-let g:netrw_dirhist_6='/Users/richard/Documents/academics/distributed/.git'
-let g:netrw_dirhist_7='/Users/richard/src/levio/frontend/src/style'
-let g:netrw_dirhist_8='/Users/richard/Documents/academics/distributed/p4/test/scripts'
+let g:netrw_dirhist_cnt =0

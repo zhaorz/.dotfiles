@@ -20,6 +20,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:/usr/local/opt/ruby/bin:$PATH"
 export PATH="$PATH:/usr/local/texlive/2014/bin/x86_64-darwin"
+export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 

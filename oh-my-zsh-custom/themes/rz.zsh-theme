@@ -32,7 +32,7 @@ git_custom_prompt() {
 # Main prompt
 #
 
-local host_name="%{$fg[magenta]%}赵"
+local host_name="%{$fg[magenta]%}λ"
 local path_string="%{$fg[yellow]%}%~"
 local prompt_string="»"
 

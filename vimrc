@@ -99,6 +99,13 @@ augroup BlendVertSplit
   autocmd ColorScheme * highlight VertSplit cterm=NONE ctermbg=NONE guibg=NONE
 augroup END
 
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 " ------------------------------------------------------------------------------
 " Editing
 
@@ -113,6 +120,10 @@ set shiftwidth=2
 " C++ options
 set cino+=N-s
 set cino+=g0
+set cino+=l1  " Switch statements
+
+autocmd FileType vhdl setlocal commentstring=--\ %s
+autocmd FileType cpp setlocal commentstring=//\ %s
 
 " ------------------------------------------------------------------------------
 " Statusline
