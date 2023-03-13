@@ -81,19 +81,20 @@ end)
 -- Focus -----------------------------------------------------------------------
 
 hotkey.bind(hyper, 'h', function ()
-  hs.window.focusWindowWest()
+  print('hs.window: ', hs.window)
+  hs.window.focusedWindow().focusWindowWest()
 end)
 
 hotkey.bind(hyper, 'j', function ()
-  hs.window.focusWindowSouth()
+  hs.window.focusedWindow().focusWindowSouth()
 end)
 
 hotkey.bind(hyper, 'k', function ()
-  hs.window.focusWindowNorth()
+  hs.window.focusedWindow().focusWindowNorth()
 end)
 
 hotkey.bind(hyper, 'l', function ()
-  hs.window.focusWindowEast()
+  hs.window.focusedWindow().focusWindowEast()
 end)
 
 hotkey.bind(hyper, 'e', function ()
@@ -114,7 +115,7 @@ local geom   = require 'hs.geometry'
 
 window.animationDuration = 0.0
 
-local gap = 15
+local gap = 10
 local margin = {
   left   =  10,
   top    =  45,
